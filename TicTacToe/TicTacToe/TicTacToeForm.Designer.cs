@@ -47,6 +47,8 @@
             this.startButton = new System.Windows.Forms.Button();
             this.resultLabel = new System.Windows.Forms.Label();
             this.resultTitleLabel = new System.Windows.Forms.Label();
+            this.currentSideTitleLabel = new System.Windows.Forms.Label();
+            this.currentSideLabel = new System.Windows.Forms.Label();
             this.gameFieldGroupBox.SuspendLayout();
             this.selectTicTacGroupBox.SuspendLayout();
             this.gameModeGroupBox.SuspendLayout();
@@ -65,6 +67,7 @@
             this.cellButton1.TabIndex = 0;
             this.cellButton1.TabStop = false;
             this.cellButton1.UseVisualStyleBackColor = false;
+            this.cellButton1.Click += new System.EventHandler(this.cellButton_Click);
             // 
             // cellButton2
             // 
@@ -79,6 +82,7 @@
             this.cellButton2.TabIndex = 1;
             this.cellButton2.TabStop = false;
             this.cellButton2.UseVisualStyleBackColor = false;
+            this.cellButton2.Click += new System.EventHandler(this.cellButton_Click);
             // 
             // cellButton3
             // 
@@ -93,6 +97,7 @@
             this.cellButton3.TabIndex = 2;
             this.cellButton3.TabStop = false;
             this.cellButton3.UseVisualStyleBackColor = false;
+            this.cellButton3.Click += new System.EventHandler(this.cellButton_Click);
             // 
             // cellButton6
             // 
@@ -107,6 +112,7 @@
             this.cellButton6.TabIndex = 5;
             this.cellButton6.TabStop = false;
             this.cellButton6.UseVisualStyleBackColor = false;
+            this.cellButton6.Click += new System.EventHandler(this.cellButton_Click);
             // 
             // cellButton5
             // 
@@ -121,6 +127,7 @@
             this.cellButton5.TabIndex = 4;
             this.cellButton5.TabStop = false;
             this.cellButton5.UseVisualStyleBackColor = false;
+            this.cellButton5.Click += new System.EventHandler(this.cellButton_Click);
             // 
             // cellButton4
             // 
@@ -135,6 +142,7 @@
             this.cellButton4.TabIndex = 3;
             this.cellButton4.TabStop = false;
             this.cellButton4.UseVisualStyleBackColor = false;
+            this.cellButton4.Click += new System.EventHandler(this.cellButton_Click);
             // 
             // cellButton9
             // 
@@ -149,6 +157,7 @@
             this.cellButton9.TabIndex = 8;
             this.cellButton9.TabStop = false;
             this.cellButton9.UseVisualStyleBackColor = false;
+            this.cellButton9.Click += new System.EventHandler(this.cellButton_Click);
             // 
             // cellButton8
             // 
@@ -163,6 +172,7 @@
             this.cellButton8.TabIndex = 7;
             this.cellButton8.TabStop = false;
             this.cellButton8.UseVisualStyleBackColor = false;
+            this.cellButton8.Click += new System.EventHandler(this.cellButton_Click);
             // 
             // cellButton7
             // 
@@ -177,6 +187,7 @@
             this.cellButton7.TabIndex = 6;
             this.cellButton7.TabStop = false;
             this.cellButton7.UseVisualStyleBackColor = false;
+            this.cellButton7.Click += new System.EventHandler(this.cellButton_Click);
             // 
             // gameFieldGroupBox
             // 
@@ -288,7 +299,7 @@
             // resultLabel
             // 
             this.resultLabel.AutoSize = true;
-            this.resultLabel.Location = new System.Drawing.Point(364, 298);
+            this.resultLabel.Location = new System.Drawing.Point(364, 293);
             this.resultLabel.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.resultLabel.Name = "resultLabel";
             this.resultLabel.Size = new System.Drawing.Size(0, 19);
@@ -304,12 +315,31 @@
             this.resultTitleLabel.TabIndex = 18;
             this.resultTitleLabel.Text = "Результат:";
             // 
+            // currentSideTitleLabel
+            // 
+            this.currentSideTitleLabel.AutoSize = true;
+            this.currentSideTitleLabel.Location = new System.Drawing.Point(364, 312);
+            this.currentSideTitleLabel.Name = "currentSideTitleLabel";
+            this.currentSideTitleLabel.Size = new System.Drawing.Size(104, 19);
+            this.currentSideTitleLabel.TabIndex = 20;
+            this.currentSideTitleLabel.Text = "Сейчас ходят:";
+            // 
+            // currentSideLabel
+            // 
+            this.currentSideLabel.AutoSize = true;
+            this.currentSideLabel.Location = new System.Drawing.Point(364, 331);
+            this.currentSideLabel.Name = "currentSideLabel";
+            this.currentSideLabel.Size = new System.Drawing.Size(0, 19);
+            this.currentSideLabel.TabIndex = 21;
+            // 
             // TicTacToeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(711, 384);
+            this.Controls.Add(this.currentSideLabel);
+            this.Controls.Add(this.currentSideTitleLabel);
             this.Controls.Add(this.resultLabel);
             this.Controls.Add(this.resultTitleLabel);
             this.Controls.Add(this.startButton);
@@ -351,6 +381,8 @@
         private System.Windows.Forms.Button startButton;
         private System.Windows.Forms.Label resultLabel;
         private System.Windows.Forms.Label resultTitleLabel;
+        private System.Windows.Forms.Label currentSideTitleLabel;
+        private System.Windows.Forms.Label currentSideLabel;
     }
 }
 
