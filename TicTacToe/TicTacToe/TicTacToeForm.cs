@@ -25,6 +25,7 @@ namespace TicTacToe
         private void startButton_Click(object sender, EventArgs e)
         {
             gameFieldGroupBox.Enabled = true;
+            resultLabel.Text = string.Empty;
         }
     }
 }

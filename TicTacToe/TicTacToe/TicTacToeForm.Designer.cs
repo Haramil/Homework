@@ -45,6 +45,8 @@
             this.singlePlayerRadioButton = new System.Windows.Forms.RadioButton();
             this.multiPlayerRadioButton = new System.Windows.Forms.RadioButton();
             this.startButton = new System.Windows.Forms.Button();
+            this.resultLabel = new System.Windows.Forms.Label();
+            this.resultTitleLabel = new System.Windows.Forms.Label();
             this.gameFieldGroupBox.SuspendLayout();
             this.selectTicTacGroupBox.SuspendLayout();
             this.gameModeGroupBox.SuspendLayout();
@@ -56,7 +58,7 @@
             this.cellButton1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.PowderBlue;
             this.cellButton1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightCyan;
             this.cellButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cellButton1.Location = new System.Drawing.Point(20, 25);
+            this.cellButton1.Location = new System.Drawing.Point(20, 30);
             this.cellButton1.Margin = new System.Windows.Forms.Padding(0);
             this.cellButton1.Name = "cellButton1";
             this.cellButton1.Size = new System.Drawing.Size(100, 100);
@@ -70,7 +72,7 @@
             this.cellButton2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.PowderBlue;
             this.cellButton2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightCyan;
             this.cellButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cellButton2.Location = new System.Drawing.Point(120, 25);
+            this.cellButton2.Location = new System.Drawing.Point(120, 30);
             this.cellButton2.Margin = new System.Windows.Forms.Padding(0);
             this.cellButton2.Name = "cellButton2";
             this.cellButton2.Size = new System.Drawing.Size(100, 100);
@@ -84,7 +86,7 @@
             this.cellButton3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.PowderBlue;
             this.cellButton3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightCyan;
             this.cellButton3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cellButton3.Location = new System.Drawing.Point(220, 25);
+            this.cellButton3.Location = new System.Drawing.Point(220, 30);
             this.cellButton3.Margin = new System.Windows.Forms.Padding(0);
             this.cellButton3.Name = "cellButton3";
             this.cellButton3.Size = new System.Drawing.Size(100, 100);
@@ -98,7 +100,7 @@
             this.cellButton6.FlatAppearance.MouseDownBackColor = System.Drawing.Color.PowderBlue;
             this.cellButton6.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightCyan;
             this.cellButton6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cellButton6.Location = new System.Drawing.Point(220, 125);
+            this.cellButton6.Location = new System.Drawing.Point(220, 130);
             this.cellButton6.Margin = new System.Windows.Forms.Padding(0);
             this.cellButton6.Name = "cellButton6";
             this.cellButton6.Size = new System.Drawing.Size(100, 100);
@@ -112,7 +114,7 @@
             this.cellButton5.FlatAppearance.MouseDownBackColor = System.Drawing.Color.PowderBlue;
             this.cellButton5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightCyan;
             this.cellButton5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cellButton5.Location = new System.Drawing.Point(120, 125);
+            this.cellButton5.Location = new System.Drawing.Point(120, 130);
             this.cellButton5.Margin = new System.Windows.Forms.Padding(0);
             this.cellButton5.Name = "cellButton5";
             this.cellButton5.Size = new System.Drawing.Size(100, 100);
@@ -126,7 +128,7 @@
             this.cellButton4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.PowderBlue;
             this.cellButton4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightCyan;
             this.cellButton4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cellButton4.Location = new System.Drawing.Point(20, 125);
+            this.cellButton4.Location = new System.Drawing.Point(20, 130);
             this.cellButton4.Margin = new System.Windows.Forms.Padding(0);
             this.cellButton4.Name = "cellButton4";
             this.cellButton4.Size = new System.Drawing.Size(100, 100);
@@ -140,7 +142,7 @@
             this.cellButton9.FlatAppearance.MouseDownBackColor = System.Drawing.Color.PowderBlue;
             this.cellButton9.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightCyan;
             this.cellButton9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cellButton9.Location = new System.Drawing.Point(220, 225);
+            this.cellButton9.Location = new System.Drawing.Point(220, 230);
             this.cellButton9.Margin = new System.Windows.Forms.Padding(0);
             this.cellButton9.Name = "cellButton9";
             this.cellButton9.Size = new System.Drawing.Size(100, 100);
@@ -154,7 +156,7 @@
             this.cellButton8.FlatAppearance.MouseDownBackColor = System.Drawing.Color.PowderBlue;
             this.cellButton8.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightCyan;
             this.cellButton8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cellButton8.Location = new System.Drawing.Point(120, 225);
+            this.cellButton8.Location = new System.Drawing.Point(120, 230);
             this.cellButton8.Margin = new System.Windows.Forms.Padding(0);
             this.cellButton8.Name = "cellButton8";
             this.cellButton8.Size = new System.Drawing.Size(100, 100);
@@ -168,7 +170,7 @@
             this.cellButton7.FlatAppearance.MouseDownBackColor = System.Drawing.Color.PowderBlue;
             this.cellButton7.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightCyan;
             this.cellButton7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cellButton7.Location = new System.Drawing.Point(20, 225);
+            this.cellButton7.Location = new System.Drawing.Point(20, 230);
             this.cellButton7.Margin = new System.Windows.Forms.Padding(0);
             this.cellButton7.Name = "cellButton7";
             this.cellButton7.Size = new System.Drawing.Size(100, 100);
@@ -188,9 +190,11 @@
             this.gameFieldGroupBox.Controls.Add(this.cellButton6);
             this.gameFieldGroupBox.Controls.Add(this.cellButton5);
             this.gameFieldGroupBox.Enabled = false;
-            this.gameFieldGroupBox.Location = new System.Drawing.Point(12, 12);
+            this.gameFieldGroupBox.Location = new System.Drawing.Point(14, 14);
+            this.gameFieldGroupBox.Margin = new System.Windows.Forms.Padding(5);
             this.gameFieldGroupBox.Name = "gameFieldGroupBox";
-            this.gameFieldGroupBox.Size = new System.Drawing.Size(340, 345);
+            this.gameFieldGroupBox.Padding = new System.Windows.Forms.Padding(5);
+            this.gameFieldGroupBox.Size = new System.Drawing.Size(340, 350);
             this.gameFieldGroupBox.TabIndex = 9;
             this.gameFieldGroupBox.TabStop = false;
             this.gameFieldGroupBox.Text = "Игра";
@@ -199,9 +203,10 @@
             // 
             this.ticRadioButton.AutoSize = true;
             this.ticRadioButton.Checked = true;
-            this.ticRadioButton.Location = new System.Drawing.Point(6, 19);
+            this.ticRadioButton.Location = new System.Drawing.Point(8, 28);
+            this.ticRadioButton.Margin = new System.Windows.Forms.Padding(5);
             this.ticRadioButton.Name = "ticRadioButton";
-            this.ticRadioButton.Size = new System.Drawing.Size(87, 17);
+            this.ticRadioButton.Size = new System.Drawing.Size(107, 23);
             this.ticRadioButton.TabIndex = 11;
             this.ticRadioButton.TabStop = true;
             this.ticRadioButton.Text = "за крестики";
@@ -210,9 +215,10 @@
             // tacRadioButton
             // 
             this.tacRadioButton.AutoSize = true;
-            this.tacRadioButton.Location = new System.Drawing.Point(6, 42);
+            this.tacRadioButton.Location = new System.Drawing.Point(8, 62);
+            this.tacRadioButton.Margin = new System.Windows.Forms.Padding(5);
             this.tacRadioButton.Name = "tacRadioButton";
-            this.tacRadioButton.Size = new System.Drawing.Size(76, 17);
+            this.tacRadioButton.Size = new System.Drawing.Size(96, 23);
             this.tacRadioButton.TabIndex = 12;
             this.tacRadioButton.Text = "за нолики";
             this.tacRadioButton.UseVisualStyleBackColor = true;
@@ -221,9 +227,11 @@
             // 
             this.selectTicTacGroupBox.Controls.Add(this.ticRadioButton);
             this.selectTicTacGroupBox.Controls.Add(this.tacRadioButton);
-            this.selectTicTacGroupBox.Location = new System.Drawing.Point(358, 87);
+            this.selectTicTacGroupBox.Location = new System.Drawing.Point(364, 125);
+            this.selectTicTacGroupBox.Margin = new System.Windows.Forms.Padding(5);
             this.selectTicTacGroupBox.Name = "selectTicTacGroupBox";
-            this.selectTicTacGroupBox.Size = new System.Drawing.Size(200, 69);
+            this.selectTicTacGroupBox.Padding = new System.Windows.Forms.Padding(5);
+            this.selectTicTacGroupBox.Size = new System.Drawing.Size(267, 101);
             this.selectTicTacGroupBox.TabIndex = 13;
             this.selectTicTacGroupBox.TabStop = false;
             this.selectTicTacGroupBox.Text = "Выберите, за кого играть";
@@ -232,9 +240,11 @@
             // 
             this.gameModeGroupBox.Controls.Add(this.singlePlayerRadioButton);
             this.gameModeGroupBox.Controls.Add(this.multiPlayerRadioButton);
-            this.gameModeGroupBox.Location = new System.Drawing.Point(358, 12);
+            this.gameModeGroupBox.Location = new System.Drawing.Point(364, 14);
+            this.gameModeGroupBox.Margin = new System.Windows.Forms.Padding(5);
             this.gameModeGroupBox.Name = "gameModeGroupBox";
-            this.gameModeGroupBox.Size = new System.Drawing.Size(200, 69);
+            this.gameModeGroupBox.Padding = new System.Windows.Forms.Padding(5);
+            this.gameModeGroupBox.Size = new System.Drawing.Size(267, 101);
             this.gameModeGroupBox.TabIndex = 14;
             this.gameModeGroupBox.TabStop = false;
             this.gameModeGroupBox.Text = "Выберите режим игры";
@@ -243,9 +253,10 @@
             // 
             this.singlePlayerRadioButton.AutoSize = true;
             this.singlePlayerRadioButton.Checked = true;
-            this.singlePlayerRadioButton.Location = new System.Drawing.Point(6, 19);
+            this.singlePlayerRadioButton.Location = new System.Drawing.Point(8, 28);
+            this.singlePlayerRadioButton.Margin = new System.Windows.Forms.Padding(5);
             this.singlePlayerRadioButton.Name = "singlePlayerRadioButton";
-            this.singlePlayerRadioButton.Size = new System.Drawing.Size(105, 17);
+            this.singlePlayerRadioButton.Size = new System.Drawing.Size(133, 23);
             this.singlePlayerRadioButton.TabIndex = 11;
             this.singlePlayerRadioButton.TabStop = true;
             this.singlePlayerRadioButton.Text = "с компьютером";
@@ -255,33 +266,58 @@
             // multiPlayerRadioButton
             // 
             this.multiPlayerRadioButton.AutoSize = true;
-            this.multiPlayerRadioButton.Location = new System.Drawing.Point(6, 42);
+            this.multiPlayerRadioButton.Location = new System.Drawing.Point(8, 62);
+            this.multiPlayerRadioButton.Margin = new System.Windows.Forms.Padding(5);
             this.multiPlayerRadioButton.Name = "multiPlayerRadioButton";
-            this.multiPlayerRadioButton.Size = new System.Drawing.Size(89, 17);
+            this.multiPlayerRadioButton.Size = new System.Drawing.Size(112, 23);
             this.multiPlayerRadioButton.TabIndex = 12;
             this.multiPlayerRadioButton.Text = "с человеком";
             this.multiPlayerRadioButton.UseVisualStyleBackColor = true;
             // 
             // startButton
             // 
-            this.startButton.Location = new System.Drawing.Point(358, 162);
+            this.startButton.Location = new System.Drawing.Point(364, 236);
+            this.startButton.Margin = new System.Windows.Forms.Padding(5);
             this.startButton.Name = "startButton";
-            this.startButton.Size = new System.Drawing.Size(200, 23);
+            this.startButton.Size = new System.Drawing.Size(267, 33);
             this.startButton.TabIndex = 15;
-            this.startButton.Text = "Начать игру";
+            this.startButton.Text = "Начать новую игру";
             this.startButton.UseVisualStyleBackColor = true;
             this.startButton.Click += new System.EventHandler(this.startButton_Click);
             // 
+            // resultLabel
+            // 
+            this.resultLabel.AutoSize = true;
+            this.resultLabel.Location = new System.Drawing.Point(364, 298);
+            this.resultLabel.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.resultLabel.Name = "resultLabel";
+            this.resultLabel.Size = new System.Drawing.Size(0, 19);
+            this.resultLabel.TabIndex = 19;
+            // 
+            // resultTitleLabel
+            // 
+            this.resultTitleLabel.AutoSize = true;
+            this.resultTitleLabel.Location = new System.Drawing.Point(364, 274);
+            this.resultTitleLabel.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.resultTitleLabel.Name = "resultTitleLabel";
+            this.resultTitleLabel.Size = new System.Drawing.Size(77, 19);
+            this.resultTitleLabel.TabIndex = 18;
+            this.resultTitleLabel.Text = "Результат:";
+            // 
             // TicTacToeForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(892, 511);
+            this.ClientSize = new System.Drawing.Size(711, 384);
+            this.Controls.Add(this.resultLabel);
+            this.Controls.Add(this.resultTitleLabel);
             this.Controls.Add(this.startButton);
             this.Controls.Add(this.gameModeGroupBox);
             this.Controls.Add(this.selectTicTacGroupBox);
             this.Controls.Add(this.gameFieldGroupBox);
+            this.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "TicTacToeForm";
             this.Text = "Крестики-нолики";
             this.gameFieldGroupBox.ResumeLayout(false);
@@ -290,6 +326,7 @@
             this.gameModeGroupBox.ResumeLayout(false);
             this.gameModeGroupBox.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -312,6 +349,8 @@
         private System.Windows.Forms.RadioButton singlePlayerRadioButton;
         private System.Windows.Forms.RadioButton multiPlayerRadioButton;
         private System.Windows.Forms.Button startButton;
+        private System.Windows.Forms.Label resultLabel;
+        private System.Windows.Forms.Label resultTitleLabel;
     }
 }
 
