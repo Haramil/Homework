@@ -12,6 +12,13 @@ namespace TicTacToe
 {
     public partial class TicTacToeForm : Form
     {
+        Bitmap emptyCellImage = Properties.Resources.Empty;
+        Dictionary<string, Bitmap> cellImages = new Dictionary<string, Bitmap>
+        {
+            { "X", Properties.Resources.X },
+            { "O", Properties.Resources.O }
+        };
+
         private int[] sumLines;
         private string currentSide;
         private string CurrentSide
@@ -49,7 +56,7 @@ namespace TicTacToe
         private void startButton_Click(object sender, EventArgs e)
         {
             foreach (Button cellButton in gameFieldGroupBox.Controls)
-                cellButton.BackgroundImage = null;
+                cellButton.BackgroundImage = emptyCellImage;
             gameFieldGroupBox.Enabled = true;
             resultLabel.Text = string.Empty;
             sumLines = new int[] { 0, 0, 0, 0, 0, 0, 0, 0 };
@@ -61,7 +68,7 @@ namespace TicTacToe
 
         private void cellButton_Click(object sender, EventArgs e)
         {
-            if ((sender as Button).BackgroundImage == null)
+            if ((sender as Button).BackgroundImage == emptyCellImage)
             {
                 if (MakeMove(sender as Button) && singlePlayerRadioButton.Checked)
                     ComputerMove();
@@ -71,7 +78,7 @@ namespace TicTacToe
         private bool MakeMove(Button cellButton)
         {
             emptyCells--;
-            cellButton.BackgroundImage = Properties.Resources.ResourceManager.GetObject(CurrentSide) as Bitmap;
+            cellButton.BackgroundImage = cellImages[CurrentSide];
             foreach (int line in cellButton.Tag as int[])
             {
                 sumLines[line] += (CurrentSide == "X") ? 1 : -1;
@@ -101,27 +108,20 @@ namespace TicTacToe
         private void ComputerMove()
         {
             Random rand = new Random();
-            for (int i = 0; i < sumLines.Length; i++)
-                if (Math.Abs(sumLines[i]) > 1)
-                {
-                    foreach (Button cell in gameFieldGroupBox.Controls)
-                    {
-                        if ((cell.Tag as IEnumerable<int>).Contains(i) && cell.BackgroundImage == null)
-                        {
-                            MakeMove(cell);
-                            return;
-                        }
-                    }
-                }
-            while (true)
-            {
-                Button randButton = gameFieldGroupBox.Controls[rand.Next(0, 9)] as Button;
-                if (randButton.BackgroundImage == null)
-                {
-                    MakeMove(randButton);
-                    break;
-                }
-            }
+            IEnumerable<Button> availableCells = gameFieldGroupBox.Controls.Cast<Button>().Where(b => b.BackgroundImage == emptyCellImage);
+            IEnumerable<Button> importantCells = availableCells.Where(b => CheckImportantCell(b));
+            if (importantCells.Count() > 0)
+                MakeMove(importantCells.ElementAt(rand.Next(0, importantCells.Count())));
+            else
+                MakeMove(availableCells.ElementAt(rand.Next(0, availableCells.Count())));
+        }
+
+        private bool CheckImportantCell(Button cell)
+        {
+            foreach (int line in (cell.Tag as int[]))
+                if (Math.Abs(sumLines[line]) == 2)
+                    return true;
+            return false;
         }
     }
 }
