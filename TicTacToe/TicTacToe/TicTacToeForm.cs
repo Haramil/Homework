@@ -1,26 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TicTacToe
 {
     public partial class TicTacToeForm : Form
     {
-        Bitmap emptyCellImage = Properties.Resources.Empty;
+        Bitmap emptyCellImage = Properties.Resources.Empty; // Изображение пустой клетки
         Dictionary<string, Bitmap> cellImages = new Dictionary<string, Bitmap>
         {
             { "X", Properties.Resources.X },
             { "O", Properties.Resources.O }
-        };
+        }; // Изображения крестика и нолика
 
-        private int[] sumLines;
-        private string currentSide;
+        private int[] sumLines; // Массив для проверки линий поля
+        private string currentSide; // Текущая сторона (кто сейчас ходит - крестики или нолики)
         private string CurrentSide
         {
             get { return currentSide; }
@@ -32,11 +29,20 @@ namespace TicTacToe
                 currentSide = value;
             }
         }
-        private int emptyCells;
+        private int emptyCells; // Счётчик пустых клеток - нужен для проверки ничьи
 
         public TicTacToeForm()
         {
             InitializeComponent();
+            // Записываем, каким линиям принадлежит клетка поля
+            // 0 - верхняя горизонталь
+            // 1 - средняя горизонталь
+            // 2 - нижняя горизонталь
+            // 3 - левая вертикаль
+            // 4 - средняя вертикаль
+            // 5 - правая вертикаль
+            // 6 - главная диагональ
+            // 7 - побочная диагональ
             cellButton1.Tag = new int[] { 0, 3, 6 };
             cellButton2.Tag = new int[] { 0, 4 };
             cellButton3.Tag = new int[] { 0, 5, 7 };
@@ -50,62 +56,66 @@ namespace TicTacToe
 
         private void singlePlayerRadioButton_CheckedChanged(object sender, EventArgs e)
         {
+            // Отключение выбора стороны при выборе одиночной игры
             selectTicTacGroupBox.Enabled = singlePlayerRadioButton.Checked;
         }
 
-        private void startButton_Click(object sender, EventArgs e)
+        private void startButton_Click(object sender, EventArgs e) // Кнопка старта
         {
-            foreach (Button cellButton in gameFieldGroupBox.Controls)
+            foreach (Button cellButton in gameFieldGroupBox.Controls) // Очистка поля
                 cellButton.BackgroundImage = emptyCellImage;
             gameFieldGroupBox.Enabled = true;
-            resultLabel.Text = string.Empty;
-            sumLines = new int[] { 0, 0, 0, 0, 0, 0, 0, 0 };
-            CurrentSide = "X";
+            resultLabel.Text = string.Empty; // Очистка сообщения результата
+            sumLines = new int[] { 0, 0, 0, 0, 0, 0, 0, 0 }; // Обнуляем массив линий поля
+            CurrentSide = "X"; // Первыми ходят крестики
             emptyCells = 9;
             if (singlePlayerRadioButton.Checked && tacRadioButton.Checked)
-                ComputerMove();
+                ComputerMove(); // Ход компьютера, если игрок - за нолики
         }
 
-        private void cellButton_Click(object sender, EventArgs e)
+        private void cellButton_Click(object sender, EventArgs e) // Ход игрока
         {
-            if ((sender as Button).BackgroundImage == emptyCellImage)
+            if ((sender as Button).BackgroundImage == emptyCellImage) // Проверка на то, что клетка пуста
             {
                 if (MakeMove(sender as Button) && singlePlayerRadioButton.Checked)
-                    ComputerMove();
+                    ComputerMove(); // Ход компьютера, если игра не окончена
             }
         }
 
-        private bool MakeMove(Button cellButton)
+        private bool MakeMove(Button cellButton) // Обработка хода
         {
             emptyCells--;
-            cellButton.BackgroundImage = cellImages[CurrentSide];
-            foreach (int line in cellButton.Tag as int[])
+            cellButton.BackgroundImage = cellImages[CurrentSide]; // Рисуем крестик или нолик на выбранной клетке
+            foreach (int line in cellButton.Tag as int[]) // Проверка линий
             {
                 sumLines[line] += (CurrentSide == "X") ? 1 : -1;
-                if (sumLines[line] == 3)
+                // Изменяем счётчик линии
+                // +1, если в клетке - крестик
+                // -1, если в клетке - нолик
+                if (sumLines[line] == 3) // Линия заполнена крестиками
                     EndGame("победил игрок за крестики");
-                else if (sumLines[line] == -3)
+                else if (sumLines[line] == -3) // Линия заполнена ноликами
                     EndGame("победил игрок за нолики");
                 else continue;
                 return false;
             }
-            if (emptyCells == 0)
+            if (emptyCells == 0) // Пустых клеток не осталось
             {
                 EndGame("ничья");
                 return false;
             }
-            CurrentSide = (CurrentSide == "X") ? "O" : "X";
+            CurrentSide = (CurrentSide == "X") ? "O" : "X"; // Смена текущей стороны
             return true;
         }
 
-        private void EndGame(string message)
+        private void EndGame(string message) // Окончание игры
         {
-            resultLabel.Text = message;
+            resultLabel.Text = message; // Вывод сообщения результата
             gameFieldGroupBox.Enabled = false;
             currentSideLabel.Text = string.Empty;
         }
 
-        private void ComputerMove()
+        private void ComputerMove() // Ход компьютера
         {
             Random rand = new Random();
             IEnumerable<Button> availableCells = gameFieldGroupBox.Controls.Cast<Button>().Where(b => b.BackgroundImage == emptyCellImage);
@@ -116,6 +126,7 @@ namespace TicTacToe
                 MakeMove(availableCells.ElementAt(rand.Next(0, availableCells.Count())));
         }
 
+        // Проверка важных клеток поля, т.е. тех клеток, чьи линии почти заполнены
         private bool CheckImportantCell(Button cell)
         {
             foreach (int line in (cell.Tag as int[]))
