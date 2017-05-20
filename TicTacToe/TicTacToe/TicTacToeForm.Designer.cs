@@ -49,6 +49,8 @@
             this.resultTitleLabel = new System.Windows.Forms.Label();
             this.currentSideTitleLabel = new System.Windows.Forms.Label();
             this.currentSideLabel = new System.Windows.Forms.Label();
+            this.errorLabel = new System.Windows.Forms.Label();
+            this.stopButton = new System.Windows.Forms.Button();
             this.gameFieldGroupBox.SuspendLayout();
             this.selectTicTacGroupBox.SuspendLayout();
             this.gameModeGroupBox.SuspendLayout();
@@ -66,6 +68,7 @@
             this.cellButton1.Size = new System.Drawing.Size(100, 100);
             this.cellButton1.TabIndex = 0;
             this.cellButton1.TabStop = false;
+            this.cellButton1.Tag = "";
             this.cellButton1.UseVisualStyleBackColor = false;
             this.cellButton1.Click += new System.EventHandler(this.cellButton_Click);
             // 
@@ -81,6 +84,7 @@
             this.cellButton2.Size = new System.Drawing.Size(100, 100);
             this.cellButton2.TabIndex = 1;
             this.cellButton2.TabStop = false;
+            this.cellButton2.Tag = "";
             this.cellButton2.UseVisualStyleBackColor = false;
             this.cellButton2.Click += new System.EventHandler(this.cellButton_Click);
             // 
@@ -96,6 +100,7 @@
             this.cellButton3.Size = new System.Drawing.Size(100, 100);
             this.cellButton3.TabIndex = 2;
             this.cellButton3.TabStop = false;
+            this.cellButton3.Tag = "";
             this.cellButton3.UseVisualStyleBackColor = false;
             this.cellButton3.Click += new System.EventHandler(this.cellButton_Click);
             // 
@@ -200,7 +205,6 @@
             this.gameFieldGroupBox.Controls.Add(this.cellButton4);
             this.gameFieldGroupBox.Controls.Add(this.cellButton6);
             this.gameFieldGroupBox.Controls.Add(this.cellButton5);
-            this.gameFieldGroupBox.Enabled = false;
             this.gameFieldGroupBox.Location = new System.Drawing.Point(14, 14);
             this.gameFieldGroupBox.Margin = new System.Windows.Forms.Padding(5);
             this.gameFieldGroupBox.Name = "gameFieldGroupBox";
@@ -299,7 +303,7 @@
             // resultLabel
             // 
             this.resultLabel.AutoSize = true;
-            this.resultLabel.Location = new System.Drawing.Point(364, 293);
+            this.resultLabel.Location = new System.Drawing.Point(364, 336);
             this.resultLabel.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.resultLabel.Name = "resultLabel";
             this.resultLabel.Size = new System.Drawing.Size(0, 19);
@@ -308,17 +312,17 @@
             // resultTitleLabel
             // 
             this.resultTitleLabel.AutoSize = true;
-            this.resultTitleLabel.Location = new System.Drawing.Point(364, 274);
+            this.resultTitleLabel.Location = new System.Drawing.Point(364, 317);
             this.resultTitleLabel.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.resultTitleLabel.Name = "resultTitleLabel";
-            this.resultTitleLabel.Size = new System.Drawing.Size(77, 19);
+            this.resultTitleLabel.Size = new System.Drawing.Size(85, 19);
             this.resultTitleLabel.TabIndex = 18;
-            this.resultTitleLabel.Text = "Результат:";
+            this.resultTitleLabel.Text = "Состояние:";
             // 
             // currentSideTitleLabel
             // 
             this.currentSideTitleLabel.AutoSize = true;
-            this.currentSideTitleLabel.Location = new System.Drawing.Point(364, 312);
+            this.currentSideTitleLabel.Location = new System.Drawing.Point(364, 355);
             this.currentSideTitleLabel.Name = "currentSideTitleLabel";
             this.currentSideTitleLabel.Size = new System.Drawing.Size(104, 19);
             this.currentSideTitleLabel.TabIndex = 20;
@@ -327,17 +331,40 @@
             // currentSideLabel
             // 
             this.currentSideLabel.AutoSize = true;
-            this.currentSideLabel.Location = new System.Drawing.Point(364, 331);
+            this.currentSideLabel.Location = new System.Drawing.Point(364, 374);
             this.currentSideLabel.Name = "currentSideLabel";
             this.currentSideLabel.Size = new System.Drawing.Size(0, 19);
             this.currentSideLabel.TabIndex = 21;
+            // 
+            // errorLabel
+            // 
+            this.errorLabel.AutoSize = true;
+            this.errorLabel.ForeColor = System.Drawing.Color.Red;
+            this.errorLabel.Location = new System.Drawing.Point(364, 393);
+            this.errorLabel.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.errorLabel.Name = "errorLabel";
+            this.errorLabel.Size = new System.Drawing.Size(0, 19);
+            this.errorLabel.TabIndex = 22;
+            // 
+            // stopButton
+            // 
+            this.stopButton.Location = new System.Drawing.Point(364, 279);
+            this.stopButton.Margin = new System.Windows.Forms.Padding(5);
+            this.stopButton.Name = "stopButton";
+            this.stopButton.Size = new System.Drawing.Size(267, 33);
+            this.stopButton.TabIndex = 23;
+            this.stopButton.Text = "Остановить игру";
+            this.stopButton.UseVisualStyleBackColor = true;
+            this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
             // 
             // TicTacToeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(711, 384);
+            this.ClientSize = new System.Drawing.Size(829, 422);
+            this.Controls.Add(this.stopButton);
+            this.Controls.Add(this.errorLabel);
             this.Controls.Add(this.currentSideLabel);
             this.Controls.Add(this.currentSideTitleLabel);
             this.Controls.Add(this.resultLabel);
@@ -383,6 +410,8 @@
         private System.Windows.Forms.Label resultTitleLabel;
         private System.Windows.Forms.Label currentSideTitleLabel;
         private System.Windows.Forms.Label currentSideLabel;
+        private System.Windows.Forms.Label errorLabel;
+        private System.Windows.Forms.Button stopButton;
     }
 }
 
