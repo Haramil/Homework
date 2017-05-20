@@ -4,6 +4,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace TicTacToe
 {
@@ -23,22 +24,22 @@ namespace TicTacToe
             selectTicTacGroupBox.Enabled = singlePlayerRadioButton.Checked;
         }
 
-        private void startButton_Click(object sender, EventArgs e) // Кнопка старта
+        private void startButton_Click(object sender, EventArgs e)
         {
             logic.StartGame();
             if (singlePlayerRadioButton.Checked && tacRadioButton.Checked)
                 logic.ComputerMove();
+            ErrorClear();
         }
 
-        private void cellButton_Click(object sender, EventArgs e) // Ход игрока
+        private void cellButton_Click(object sender, EventArgs e)
         {
             try
             {
                 logic.PlayerMove((sender as Button).TabIndex);
-
                 if (singlePlayerRadioButton.Checked)
                     logic.ComputerMove();
-                errorLabel.Text = string.Empty;
+                ErrorClear();
             }
             catch (GameNotInProgressException ex)
             {
@@ -47,12 +48,21 @@ namespace TicTacToe
             catch (CellNotEmptyException ex)
             {
                 errorLabel.Text = string.Format("Ячейка [{0}][{1}] занята", ex.HorizontalNum + 1, ex.VerticalNum + 1);
+                (sender as Button).FlatAppearance.BorderColor = Color.Red;
             }
         }
 
         private void stopButton_Click(object sender, EventArgs e)
         {
             logic.StopGame(GameState.NotInProgress);
+            ErrorClear();
+        }
+
+        private void ErrorClear()
+        {
+            errorLabel.Text = string.Empty;
+            foreach (Button cell in gameFieldGroupBox.Controls)
+                cell.FlatAppearance.BorderColor = Color.Black;
         }
     }
 }

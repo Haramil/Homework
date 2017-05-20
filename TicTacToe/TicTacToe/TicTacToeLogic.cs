@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TicTacToe
 {
@@ -41,7 +39,7 @@ namespace TicTacToe
 
         public abstract void StartGame();
         public abstract void StopGame(GameState finalState);
-        public abstract void Move(int cellNum);
+        protected abstract void Move(int cellNum);
 
         public void PlayerMove(int cellNum)
         {
