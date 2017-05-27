@@ -64,6 +64,16 @@ namespace TicTacToe
         protected GameState gameState;
 
         /// <summary>
+        /// Указывает, с кем играет игрок - с компьютером или с другим игроком
+        /// </summary>
+        protected bool isSinglePlayer;
+
+        /// <summary>
+        /// Указывает, кто ходит вторым - человек или компьютер
+        /// </summary>
+        protected bool isPlayerSecond;
+
+        /// <summary>
         /// Инициализирует новый экземпляр класса TicTacToeLogic, заполняет список ячеек
         /// </summary>
         public TicTacToeLogic()
@@ -83,7 +93,9 @@ namespace TicTacToe
         /// <summary>
         /// Запускает игру
         /// </summary>
-        public abstract void StartGame();
+        /// <param name="isSinglePlayer">Указывает, с кем играет игрок - с компьютером или с другим игроком</param>
+        /// <param name="isPlayerSecond">Указывает, кто ходит вторым - человек или компьютер</param>
+        public abstract void StartGame(bool isSinglePlayer, bool isPlayerSecond);
 
         /// <summary>
         /// Останавливает игру
@@ -109,7 +121,12 @@ namespace TicTacToe
             else if (selectedCell.CellState != CellState.Empty) // Ячейка занята
                 throw new CellNotEmptyException(selectedCell.CellLines[0], (byte)(selectedCell.CellLines[1] - 3));
             else
+            {
                 Move(cellNum);
+                if (isSinglePlayer)
+                    // Ход компьютера
+                    ComputerMove();
+            }
         }
 
         /// <summary>
@@ -170,7 +187,7 @@ namespace TicTacToe
     /// <summary>
     /// Возможные состояния игры
     /// </summary>
-    enum GameState
+    public enum GameState
     {
         /// <summary>
         /// Игра остановлена

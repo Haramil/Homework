@@ -54,7 +54,7 @@
             this.statisticsGroupBox = new System.Windows.Forms.GroupBox();
             this.statisticsDataGridView = new System.Windows.Forms.DataGridView();
             this.getStatisticsButton = new System.Windows.Forms.Button();
-            this.urlTextBox = new System.Windows.Forms.TextBox();
+            this.uriTextBox = new System.Windows.Forms.TextBox();
             this.gameFieldGroupBox.SuspendLayout();
             this.selectTicTacGroupBox.SuspendLayout();
             this.gameModeGroupBox.SuspendLayout();
@@ -391,13 +391,13 @@
             this.getStatisticsButton.Text = "Запросить статистику";
             this.getStatisticsButton.UseVisualStyleBackColor = true;
             // 
-            // urlTextBox
+            // uriTextBox
             // 
-            this.urlTextBox.Location = new System.Drawing.Point(639, 318);
-            this.urlTextBox.Name = "urlTextBox";
-            this.urlTextBox.Size = new System.Drawing.Size(542, 27);
-            this.urlTextBox.TabIndex = 26;
-            this.urlTextBox.Text = "http://localhost:59577/";
+            this.uriTextBox.Location = new System.Drawing.Point(639, 318);
+            this.uriTextBox.Name = "uriTextBox";
+            this.uriTextBox.Size = new System.Drawing.Size(542, 27);
+            this.uriTextBox.TabIndex = 26;
+            this.uriTextBox.Text = "http://localhost:59577/";
             // 
             // TicTacToeForm
             // 
@@ -405,7 +405,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1201, 422);
-            this.Controls.Add(this.urlTextBox);
+            this.Controls.Add(this.uriTextBox);
             this.Controls.Add(this.getStatisticsButton);
             this.Controls.Add(this.statisticsGroupBox);
             this.Controls.Add(this.stopButton);
@@ -462,7 +462,7 @@
         private System.Windows.Forms.GroupBox statisticsGroupBox;
         private System.Windows.Forms.DataGridView statisticsDataGridView;
         private System.Windows.Forms.Button getStatisticsButton;
-        private System.Windows.Forms.TextBox urlTextBox;
+        private System.Windows.Forms.TextBox uriTextBox;
     }
 }
 

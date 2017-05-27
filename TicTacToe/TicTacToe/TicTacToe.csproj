@@ -51,6 +51,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CellNotEmptyException.cs" />
+    <Compile Include="Statistics.cs" />
+    <Compile Include="StatisticsWrapper.cs" />
     <Compile Include="TicTacToeFormLogic.cs" />
     <Compile Include="TicTacToeLogic.cs" />
     <Compile Include="GameNotInProgressException.cs" />

@@ -22,6 +22,11 @@ namespace TicTacToe
         private Label resultLabel;
 
         /// <summary>
+        /// Объект класса TextBox, в котором записан URI сервера со статистикой
+        /// </summary>
+        private TextBox addressTextBox;
+
+        /// <summary>
         /// Хэшированное множество объектов класса Button, представляющих ячейки игрового поля
         /// </summary>
         private HashSet<Button> cellButtonSet;
@@ -107,17 +112,22 @@ namespace TicTacToe
         /// <param name="cellButtonSet">Хэшированное множество объектов класса Button, представляющих ячейки игрового поля</param>
         /// <param name="sideLabel">Объект класса Label, куда будет выводиться информация о том, кто сейчас ходит</param>
         /// <param name="resultLabel">Объект класса Label, куда будет выводиться информация о результате игры</param>
-        public TicTacToeFormLogic(HashSet<Button> cellButtonSet, Label sideLabel, Label resultLabel) : base()
+        /// <param name="addressTextBox">Объект класса TextBox, в котором записан URI сервера со статистикой</param>
+        public TicTacToeFormLogic(HashSet<Button> cellButtonSet, Label sideLabel, Label resultLabel,
+            TextBox addressTextBox) : base()
         {   
             this.cellButtonSet = cellButtonSet;
             this.sideLabel = sideLabel;
             this.resultLabel = resultLabel;
+            this.addressTextBox = addressTextBox;
         }
 
         /// <summary>
         /// Запускает игру
         /// </summary>
-        public override void StartGame()
+        /// <param name="isSinglePlayer">Указывает, с кем играет игрок - с компьютером или с другим игроком</param>
+        /// <param name="isPlayerSecond">Указывает, кто ходит вторым - человек или компьютер</param>
+        public override void StartGame(bool isSinglePlayer, bool isPlayerSecond)
         {
             lineStates = new sbyte[8]; // Очищаем состояния линий поля
             for (int i = 0; i < cellList.Count; i++) // Очищаем все ячейки поля
@@ -127,6 +137,11 @@ namespace TicTacToe
             }
             CurrentSideState = CellState.Tic; // Первыми ходят крестики
             GameState = GameState.InProgress; // Состояние "в процессе"
+            this.isSinglePlayer = isSinglePlayer;
+            this.isPlayerSecond = isPlayerSecond;
+            // Если выбрана однопользовательская игра, и игрок за нолики, то осуществляется первый ход компьютера
+            if (isSinglePlayer && isPlayerSecond)
+                ComputerMove();
         }
 
         /// <summary>
@@ -184,6 +199,22 @@ namespace TicTacToe
         /// <param name="finalState">Итоговое состояние игры</param>
         public override void StopGame(GameState finalState)
         {
+            switch (finalState)
+            {
+                case GameState.Draw:
+                case GameState.TicWon:
+                case GameState.TacWon:
+                    StatisticsWrapper.SendGameResult(addressTextBox.Text, new Statistics {
+                        GameDate = DateTime.Now,
+                        GameResult = finalState,
+                        MovesCount = cellList.Count(c => c.CellState != CellState.Empty),
+                        TicPlayer = isSinglePlayer && isPlayerSecond ? Player.Computer : Player.Human,
+                        TacPlayer = isSinglePlayer && !isPlayerSecond ? Player.Computer : Player.Human
+                    });
+                    break;
+                default:
+                    break;
+            }
             GameState = finalState;
             CurrentSideState = CellState.Empty;
         }

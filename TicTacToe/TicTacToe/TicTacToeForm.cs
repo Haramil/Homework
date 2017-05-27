@@ -17,7 +17,7 @@ namespace TicTacToe
             // Создаем экземпляр класса TicTacToeFormLogic,
             // передаем в него множество с кнопками и лейблы для вывода информации
             logic = new TicTacToeFormLogic(new HashSet<Button>(gameFieldGroupBox.Controls.Cast<Button>()), 
-                currentSideLabel, resultLabel);
+                currentSideLabel, resultLabel, uriTextBox);
         }
 
         private void singlePlayerRadioButton_CheckedChanged(object sender, EventArgs e)
@@ -29,10 +29,7 @@ namespace TicTacToe
         private void startButton_Click(object sender, EventArgs e)
         {
             // Запуск игры
-            logic.StartGame();
-            // Если выбрана однопользовательская игра, и игрок за нолики, то осуществляется первый ход компьютера
-            if (singlePlayerRadioButton.Checked && tacRadioButton.Checked)
-                logic.ComputerMove();
+            logic.StartGame(singlePlayerRadioButton.Checked, tacRadioButton.Checked);
             ErrorClear();
         }
 
@@ -42,9 +39,6 @@ namespace TicTacToe
             {
                 // Ход игрока
                 logic.PlayerMove((sender as Button).TabIndex);
-                if (singlePlayerRadioButton.Checked)
-                    // Ход компьютера
-                    logic.ComputerMove();
                 ErrorClear();
             }
             catch (GameNotInProgressException ex) // Обрабатываем исключение GameNotInProgressException

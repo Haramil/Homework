@@ -268,6 +268,12 @@
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TicTacToe\TicTacToe.csproj">
+      <Project>{73228740-979e-4637-940e-0fda4564dc0d}</Project>
+      <Name>TicTacToe</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

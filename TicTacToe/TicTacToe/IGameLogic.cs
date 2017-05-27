@@ -8,7 +8,9 @@
         /// <summary>
         /// Запускает игру
         /// </summary>
-        void StartGame();
+        /// <param name="isSinglePlayer">Указывает, с кем играет игрок - с компьютером или с другим игроком</param>
+        /// <param name="isPlayerSecond">Указывает, кто ходит вторым - человек или компьютер</param>
+        void StartGame(bool isSinglePlayer, bool isPlayerSecond);
 
         /// <summary>
         /// Останавливает игру
