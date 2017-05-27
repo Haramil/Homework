@@ -169,7 +169,7 @@ namespace TicTacToe
                     break;
             }
             // Если все ячейки заполнены, то заканчиваем игру (ничья)
-            if (cellList.Count(c => c.CellState == CellState.Empty) == 0)
+            if (!cellList.Any(c => c.CellState == CellState.Empty))
             {
                 StopGame(GameState.Draw);
                 return;
