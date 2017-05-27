@@ -2,8 +2,10 @@
 
 @{
     ViewBag.Title = "Статистика";
-    Layout = "~/Views/Shared/_StatisticsLayout.cshtml";
 }
+<div class="alert alert-info" role="alert">
+    Процент побед пользователя: @Model.PlayerWinPercent
+</div>
 <div class="table-responsive">
     <table class="table table-bordered">
         <tr>
@@ -24,7 +26,4 @@
             </tr>
         }
     </table>
-</div>
-<div class="alert alert-info" role="alert">
-    Процент побед пользователя: @Model.PlayerWinPercent
 </div>
