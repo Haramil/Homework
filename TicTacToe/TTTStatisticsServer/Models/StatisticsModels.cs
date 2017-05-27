@@ -15,10 +15,10 @@ namespace TTTStatisticsServer.Models
             return new FullStatistics
             {
                 StatisticsList = statisticsList,
-                PlayerWinPercent = statisticsList.Count(s => 
+                PlayerWinPercent = statisticsList.Count == 0 ? 0 : statisticsList.Count(s => 
                     ((s.GameResult == GameState.TicWon && s.TicPlayer == Player.Human) || 
                     (s.GameResult == GameState.TacWon && s.TacPlayer == Player.Human))) * 100 / 
-                    statisticsList.Count 
+                    statisticsList.Count
             };
         }
 
@@ -31,7 +31,7 @@ namespace TTTStatisticsServer.Models
         {
             try
             {
-                return File.ReadAllText(HostingEnvironment.ApplicationPhysicalPath + @"\Statistics.json");
+                return File.ReadAllText(HostingEnvironment.ApplicationPhysicalPath + @"\App_Data\Statistics.json");
             }
             catch
             {
@@ -48,7 +48,7 @@ namespace TTTStatisticsServer.Models
         {
             List<Statistics> statistics = GetStatisticsList();
             statistics.Add(JsonConvert.DeserializeObject<Statistics>(jsonString));
-            File.WriteAllText(HostingEnvironment.ApplicationPhysicalPath + @"\Statistics.json",
+            File.WriteAllText(HostingEnvironment.ApplicationPhysicalPath + @"\App_Data\Statistics.json",
                 JsonConvert.SerializeObject(statistics));
         }
     }

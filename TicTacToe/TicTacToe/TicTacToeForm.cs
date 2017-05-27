@@ -76,9 +76,16 @@ namespace TicTacToe
 
         private void getStatisticsButton_Click(object sender, EventArgs e)
         {
-            FullStatistics fullStatistics = StatisticsWrapper.GetStatistics(uriTextBox.Text);
-            statisticsDataGridView.DataSource = fullStatistics.StatisticsList;
-            percentLabel.Text = fullStatistics.PlayerWinPercent.ToString();
+            try
+            {
+                FullStatistics fullStatistics = StatisticsWrapper.GetStatistics(uriTextBox.Text);
+                statisticsDataGridView.DataSource = fullStatistics.StatisticsList;
+                percentLabel.Text = fullStatistics.PlayerWinPercent.ToString();
+            }
+            catch (Exception ex)
+            {
+                errorLabel.Text = ex.Message;
+            }
         }
     }
 }

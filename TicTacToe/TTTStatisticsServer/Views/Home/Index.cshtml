@@ -1,17 +1,11 @@
 ﻿@model TTTStatisticsLibrary.FullStatistics
+
 @{
-    Layout = null;
+    ViewBag.Title = "Статистика";
+    Layout = "~/Views/Shared/_StatisticsLayout.cshtml";
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <table>
+<div class="table-responsive">
+    <table class="table table-bordered">
         <tr>
             <th>Дата и время игры</th>
             <th>Число ходов</th>
@@ -30,6 +24,7 @@
             </tr>
         }
     </table>
-    <div>Процент побед пользователя: @Model.PlayerWinPercent</div>
-</body>
-</html>
+</div>
+<div class="alert alert-info" role="alert">
+    Процент побед пользователя: @Model.PlayerWinPercent
+</div>
