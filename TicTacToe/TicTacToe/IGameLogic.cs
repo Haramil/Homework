@@ -1,4 +1,6 @@
-﻿namespace TicTacToe
+﻿using StatisticsLibrary;
+
+namespace TicTacToe
 {
     /// <summary>
     /// Интерфейс игровой логики

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StatisticsLibrary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -184,34 +185,5 @@ namespace TicTacToe
         Tac
     }
 
-    /// <summary>
-    /// Возможные состояния игры
-    /// </summary>
-    public enum GameState
-    {
-        /// <summary>
-        /// Игра остановлена
-        /// </summary>
-        NotInProgress,
-
-        /// <summary>
-        /// Игра в процессе
-        /// </summary>
-        InProgress,
-
-        /// <summary>
-        /// Победили крестики
-        /// </summary>
-        TicWon,
-
-        /// <summary>
-        /// Победили нолики
-        /// </summary>
-        TacWon,
-
-        /// <summary>
-        /// Ничья
-        /// </summary>
-        Draw
-    }
+    
 }

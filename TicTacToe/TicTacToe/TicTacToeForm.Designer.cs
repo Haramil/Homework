@@ -55,6 +55,7 @@
             this.statisticsDataGridView = new System.Windows.Forms.DataGridView();
             this.getStatisticsButton = new System.Windows.Forms.Button();
             this.uriTextBox = new System.Windows.Forms.TextBox();
+            this.uriLabel = new System.Windows.Forms.Label();
             this.gameFieldGroupBox.SuspendLayout();
             this.selectTicTacGroupBox.SuspendLayout();
             this.gameModeGroupBox.SuspendLayout();
@@ -393,11 +394,20 @@
             // 
             // uriTextBox
             // 
-            this.uriTextBox.Location = new System.Drawing.Point(639, 318);
+            this.uriTextBox.Location = new System.Drawing.Point(810, 318);
             this.uriTextBox.Name = "uriTextBox";
-            this.uriTextBox.Size = new System.Drawing.Size(542, 27);
+            this.uriTextBox.Size = new System.Drawing.Size(371, 27);
             this.uriTextBox.TabIndex = 26;
             this.uriTextBox.Text = "http://localhost:59577/";
+            // 
+            // uriLabel
+            // 
+            this.uriLabel.AutoSize = true;
+            this.uriLabel.Location = new System.Drawing.Point(635, 321);
+            this.uriLabel.Name = "uriLabel";
+            this.uriLabel.Size = new System.Drawing.Size(169, 19);
+            this.uriLabel.TabIndex = 27;
+            this.uriLabel.Text = "URI сервера статистики";
             // 
             // TicTacToeForm
             // 
@@ -405,6 +415,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1201, 422);
+            this.Controls.Add(this.uriLabel);
             this.Controls.Add(this.uriTextBox);
             this.Controls.Add(this.getStatisticsButton);
             this.Controls.Add(this.statisticsGroupBox);
@@ -463,6 +474,7 @@
         private System.Windows.Forms.DataGridView statisticsDataGridView;
         private System.Windows.Forms.Button getStatisticsButton;
         private System.Windows.Forms.TextBox uriTextBox;
+        private System.Windows.Forms.Label uriLabel;
     }
 }
 

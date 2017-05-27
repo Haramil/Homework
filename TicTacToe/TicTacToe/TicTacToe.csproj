@@ -51,7 +51,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CellNotEmptyException.cs" />
-    <Compile Include="Statistics.cs" />
     <Compile Include="StatisticsWrapper.cs" />
     <Compile Include="TicTacToeFormLogic.cs" />
     <Compile Include="TicTacToeLogic.cs" />
@@ -100,6 +99,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Empty.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\StatisticsLibrary\StatisticsLibrary.csproj">
+      <Project>{fb58ef5f-e2b6-4837-90a9-3da668e8fd87}</Project>
+      <Name>StatisticsLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
