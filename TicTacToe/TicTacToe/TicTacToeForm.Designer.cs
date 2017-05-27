@@ -56,6 +56,8 @@
             this.getStatisticsButton = new System.Windows.Forms.Button();
             this.uriTextBox = new System.Windows.Forms.TextBox();
             this.uriLabel = new System.Windows.Forms.Label();
+            this.percentTitleLabel = new System.Windows.Forms.Label();
+            this.percentLabel = new System.Windows.Forms.Label();
             this.gameFieldGroupBox.SuspendLayout();
             this.selectTicTacGroupBox.SuspendLayout();
             this.gameModeGroupBox.SuspendLayout();
@@ -366,6 +368,8 @@
             // 
             // statisticsGroupBox
             // 
+            this.statisticsGroupBox.Controls.Add(this.percentLabel);
+            this.statisticsGroupBox.Controls.Add(this.percentTitleLabel);
             this.statisticsGroupBox.Controls.Add(this.statisticsDataGridView);
             this.statisticsGroupBox.Location = new System.Drawing.Point(639, 15);
             this.statisticsGroupBox.Name = "statisticsGroupBox";
@@ -380,7 +384,7 @@
             this.statisticsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.statisticsDataGridView.Location = new System.Drawing.Point(18, 33);
             this.statisticsDataGridView.Name = "statisticsDataGridView";
-            this.statisticsDataGridView.Size = new System.Drawing.Size(506, 246);
+            this.statisticsDataGridView.Size = new System.Drawing.Size(506, 221);
             this.statisticsDataGridView.TabIndex = 0;
             // 
             // getStatisticsButton
@@ -391,6 +395,7 @@
             this.getStatisticsButton.TabIndex = 25;
             this.getStatisticsButton.Text = "Запросить статистику";
             this.getStatisticsButton.UseVisualStyleBackColor = true;
+            this.getStatisticsButton.Click += new System.EventHandler(this.getStatisticsButton_Click);
             // 
             // uriTextBox
             // 
@@ -408,6 +413,23 @@
             this.uriLabel.Size = new System.Drawing.Size(169, 19);
             this.uriLabel.TabIndex = 27;
             this.uriLabel.Text = "URI сервера статистики";
+            // 
+            // percentTitleLabel
+            // 
+            this.percentTitleLabel.AutoSize = true;
+            this.percentTitleLabel.Location = new System.Drawing.Point(18, 261);
+            this.percentTitleLabel.Name = "percentTitleLabel";
+            this.percentTitleLabel.Size = new System.Drawing.Size(184, 19);
+            this.percentTitleLabel.TabIndex = 1;
+            this.percentTitleLabel.Text = "Процент побед человека:";
+            // 
+            // percentLabel
+            // 
+            this.percentLabel.AutoSize = true;
+            this.percentLabel.Location = new System.Drawing.Point(208, 261);
+            this.percentLabel.Name = "percentLabel";
+            this.percentLabel.Size = new System.Drawing.Size(0, 19);
+            this.percentLabel.TabIndex = 2;
             // 
             // TicTacToeForm
             // 
@@ -439,6 +461,7 @@
             this.gameModeGroupBox.ResumeLayout(false);
             this.gameModeGroupBox.PerformLayout();
             this.statisticsGroupBox.ResumeLayout(false);
+            this.statisticsGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.statisticsDataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -475,6 +498,8 @@
         private System.Windows.Forms.Button getStatisticsButton;
         private System.Windows.Forms.TextBox uriTextBox;
         private System.Windows.Forms.Label uriLabel;
+        private System.Windows.Forms.Label percentLabel;
+        private System.Windows.Forms.Label percentTitleLabel;
     }
 }
 

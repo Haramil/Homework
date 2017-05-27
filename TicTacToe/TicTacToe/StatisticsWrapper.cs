@@ -1,7 +1,9 @@
 ﻿using Newtonsoft.Json;
-using StatisticsLibrary;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Net;
+using System.Text;
+using TTTStatisticsLibrary;
 
 namespace TicTacToe
 {
@@ -11,15 +13,18 @@ namespace TicTacToe
         {
             using (WebClient webClient = new WebClient())
             {
-                webClient.UploadString(uri, JsonConvert.SerializeObject(gameResult));
+                NameValueCollection postDataCollection = new NameValueCollection();
+                postDataCollection.Add("jsonString", JsonConvert.SerializeObject(gameResult));
+                webClient.UploadValues(uri + @"/Home/SetStatistics", postDataCollection);
             }
         }
 
-        public static List<Statistics> GetStatistics(string uri)
+        public static FullStatistics GetStatistics(string uri)
         {
             using (WebClient webClient = new WebClient())
             {
-                return JsonConvert.DeserializeObject<List<Statistics>>(webClient.UploadString(uri, null));
+                return JsonConvert.DeserializeObject<FullStatistics>(Encoding.UTF8.GetString(
+                    webClient.UploadValues(uri + @"/Home/GetStatistics", new NameValueCollection())));
             }
         }
     }

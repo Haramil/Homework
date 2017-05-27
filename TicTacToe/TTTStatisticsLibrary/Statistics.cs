@@ -1,7 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 
-namespace StatisticsLibrary
+namespace TTTStatisticsLibrary
 {
+    public class FullStatistics
+    {
+        public List<Statistics> StatisticsList { get; set; }
+        public int PlayerWinPercent { get; set; }
+    }
+
     /// <summary>
     /// Статистика сыгранной игры
     /// </summary>

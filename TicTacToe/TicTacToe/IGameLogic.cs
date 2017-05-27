@@ -1,4 +1,4 @@
-﻿using StatisticsLibrary;
+﻿using TTTStatisticsLibrary;
 
 namespace TicTacToe
 {

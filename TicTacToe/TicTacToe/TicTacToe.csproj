@@ -101,9 +101,9 @@
     <None Include="Resources\Empty.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\StatisticsLibrary\StatisticsLibrary.csproj">
-      <Project>{fb58ef5f-e2b6-4837-90a9-3da668e8fd87}</Project>
-      <Name>StatisticsLibrary</Name>
+    <ProjectReference Include="..\TTTStatisticsLibrary\TTTStatisticsLibrary.csproj">
+      <Project>{cb29d69e-b647-433b-ba0e-2979502bd8ff}</Project>
+      <Name>TTTStatisticsLibrary</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

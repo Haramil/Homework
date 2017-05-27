@@ -1,10 +1,10 @@
-﻿using StatisticsLibrary;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using TTTStatisticsLibrary;
 
 namespace TicTacToe
 {
@@ -72,6 +72,13 @@ namespace TicTacToe
             errorLabel.Text = string.Empty;
             foreach (Button cell in gameFieldGroupBox.Controls)
                 cell.FlatAppearance.BorderColor = Color.Black;
+        }
+
+        private void getStatisticsButton_Click(object sender, EventArgs e)
+        {
+            FullStatistics fullStatistics = StatisticsWrapper.GetStatistics(uriTextBox.Text);
+            statisticsDataGridView.DataSource = fullStatistics.StatisticsList;
+            percentLabel.Text = fullStatistics.PlayerWinPercent.ToString();
         }
     }
 }

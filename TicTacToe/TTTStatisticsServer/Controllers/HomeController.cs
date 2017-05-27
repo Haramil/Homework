@@ -1,30 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Runtime.CompilerServices;
 using System.Web.Mvc;
+using TTTStatisticsServer.Models;
 
 namespace TTTStatisticsServer.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        [HttpGet]
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        public ViewResult Index()
         {
-            return View();
+
+            return View(StatisticsModels.GetFullStatistics());
         }
 
-        public ActionResult About()
+        [HttpPost]
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        public string GetStatistics()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+            return StatisticsModels.SerializeFullStatistics();
         }
 
-        public ActionResult Contact()
+        [HttpPost]
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        public void SetStatistics(string jsonString)
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            StatisticsModels.AddStatistics(jsonString);
         }
     }
 }
