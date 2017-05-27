@@ -51,9 +51,15 @@
             this.currentSideLabel = new System.Windows.Forms.Label();
             this.errorLabel = new System.Windows.Forms.Label();
             this.stopButton = new System.Windows.Forms.Button();
+            this.statisticsGroupBox = new System.Windows.Forms.GroupBox();
+            this.statisticsDataGridView = new System.Windows.Forms.DataGridView();
+            this.getStatisticsButton = new System.Windows.Forms.Button();
+            this.urlTextBox = new System.Windows.Forms.TextBox();
             this.gameFieldGroupBox.SuspendLayout();
             this.selectTicTacGroupBox.SuspendLayout();
             this.gameModeGroupBox.SuspendLayout();
+            this.statisticsGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.statisticsDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // cellButton1
@@ -357,12 +363,51 @@
             this.stopButton.UseVisualStyleBackColor = true;
             this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
             // 
+            // statisticsGroupBox
+            // 
+            this.statisticsGroupBox.Controls.Add(this.statisticsDataGridView);
+            this.statisticsGroupBox.Location = new System.Drawing.Point(639, 15);
+            this.statisticsGroupBox.Name = "statisticsGroupBox";
+            this.statisticsGroupBox.Padding = new System.Windows.Forms.Padding(15, 10, 15, 15);
+            this.statisticsGroupBox.Size = new System.Drawing.Size(542, 297);
+            this.statisticsGroupBox.TabIndex = 24;
+            this.statisticsGroupBox.TabStop = false;
+            this.statisticsGroupBox.Text = "Статистика";
+            // 
+            // statisticsDataGridView
+            // 
+            this.statisticsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.statisticsDataGridView.Location = new System.Drawing.Point(18, 33);
+            this.statisticsDataGridView.Name = "statisticsDataGridView";
+            this.statisticsDataGridView.Size = new System.Drawing.Size(506, 246);
+            this.statisticsDataGridView.TabIndex = 0;
+            // 
+            // getStatisticsButton
+            // 
+            this.getStatisticsButton.Location = new System.Drawing.Point(639, 351);
+            this.getStatisticsButton.Name = "getStatisticsButton";
+            this.getStatisticsButton.Size = new System.Drawing.Size(542, 33);
+            this.getStatisticsButton.TabIndex = 25;
+            this.getStatisticsButton.Text = "Запросить статистику";
+            this.getStatisticsButton.UseVisualStyleBackColor = true;
+            // 
+            // urlTextBox
+            // 
+            this.urlTextBox.Location = new System.Drawing.Point(639, 318);
+            this.urlTextBox.Name = "urlTextBox";
+            this.urlTextBox.Size = new System.Drawing.Size(542, 27);
+            this.urlTextBox.TabIndex = 26;
+            this.urlTextBox.Text = "http://localhost:59577/";
+            // 
             // TicTacToeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(829, 422);
+            this.ClientSize = new System.Drawing.Size(1201, 422);
+            this.Controls.Add(this.urlTextBox);
+            this.Controls.Add(this.getStatisticsButton);
+            this.Controls.Add(this.statisticsGroupBox);
             this.Controls.Add(this.stopButton);
             this.Controls.Add(this.errorLabel);
             this.Controls.Add(this.currentSideLabel);
@@ -382,6 +427,8 @@
             this.selectTicTacGroupBox.PerformLayout();
             this.gameModeGroupBox.ResumeLayout(false);
             this.gameModeGroupBox.PerformLayout();
+            this.statisticsGroupBox.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.statisticsDataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -412,6 +459,10 @@
         private System.Windows.Forms.Label currentSideLabel;
         private System.Windows.Forms.Label errorLabel;
         private System.Windows.Forms.Button stopButton;
+        private System.Windows.Forms.GroupBox statisticsGroupBox;
+        private System.Windows.Forms.DataGridView statisticsDataGridView;
+        private System.Windows.Forms.Button getStatisticsButton;
+        private System.Windows.Forms.TextBox urlTextBox;
     }
 }
 
