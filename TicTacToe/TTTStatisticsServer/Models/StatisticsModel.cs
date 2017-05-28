@@ -4,10 +4,11 @@ using System.IO;
 using System.Linq;
 using System.Web.Hosting;
 using TTTStatisticsLibrary;
+using TTTStatisticsServer.Hubs;
 
 namespace TTTStatisticsServer.Models
 {
-    public static class StatisticsModels
+    public static class StatisticsModel
     {
         public static List<Statistics> GetStatisticsList()
         {
@@ -32,6 +33,10 @@ namespace TTTStatisticsServer.Models
             statistics.Add(JsonConvert.DeserializeObject<Statistics>(jsonString));
             File.WriteAllText(HostingEnvironment.ApplicationPhysicalPath + @"\App_Data\Statistics.json",
                 JsonConvert.SerializeObject(statistics));
+            StatisticsHub.Broadcast(jsonString, CalculatePlayerPercent(statistics, Player.Human),
+                CalculatePlayerPercent(statistics, Player.Computer), 
+                CalculateSidePercent(statistics, GameState.TicWon), 
+                CalculateSidePercent(statistics, GameState.TacWon));
         }
 
         public static int CalculatePlayerPercent(List<Statistics> statisticsList, Player player)

@@ -1,4 +1,6 @@
 ﻿using System;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace TTTStatisticsLibrary
 {
@@ -15,16 +17,19 @@ namespace TTTStatisticsLibrary
         /// <summary>
         /// Кто играл за крестики
         /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
         public Player TicPlayer { get; set; }
 
         /// <summary>
         /// Кто играл за нолики
         /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
         public Player TacPlayer { get; set; }
 
         /// <summary>
         /// Результат игры
         /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
         public GameState GameResult { get; set; }
 
         /// <summary>

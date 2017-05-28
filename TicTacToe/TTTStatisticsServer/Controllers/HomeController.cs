@@ -11,25 +11,25 @@ namespace TTTStatisticsServer.Controllers
         [HttpGet]
         public ViewResult Index()
         {
-            List<Statistics> statisticsList = StatisticsModels.GetStatisticsList();
-            ViewBag.HumanPercent = StatisticsModels.CalculatePlayerPercent(statisticsList, Player.Human);
-            ViewBag.ComputerPercent = StatisticsModels.CalculatePlayerPercent(statisticsList, Player.Computer);
-            ViewBag.TicPercent = StatisticsModels.CalculateSidePercent(statisticsList, GameState.TicWon);
-            ViewBag.TacPercent = StatisticsModels.CalculateSidePercent(statisticsList, GameState.TacWon);
+            List<Statistics> statisticsList = StatisticsModel.GetStatisticsList();
+            ViewBag.HumanPercent = StatisticsModel.CalculatePlayerPercent(statisticsList, Player.Human);
+            ViewBag.ComputerPercent = StatisticsModel.CalculatePlayerPercent(statisticsList, Player.Computer);
+            ViewBag.TicPercent = StatisticsModel.CalculateSidePercent(statisticsList, GameState.TicWon);
+            ViewBag.TacPercent = StatisticsModel.CalculateSidePercent(statisticsList, GameState.TacWon);
             return View(statisticsList);
         }
 
         [HttpPost]
         public string GetStatistics()
         {
-            return StatisticsModels.ReadJsonFile();
+            return StatisticsModel.ReadJsonFile();
         }
 
         [HttpPost]
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void SetStatistics(string jsonString)
         {
-            StatisticsModels.AddStatistics(jsonString);
+            StatisticsModel.AddStatistics(jsonString);
         }
     }
 }
