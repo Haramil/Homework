@@ -8,6 +8,7 @@ namespace TTTStatisticsServer.Hubs
             int ticPercent, int tacPercent)
         {
             IHubContext hubContext = GlobalHost.ConnectionManager.GetHubContext<StatisticsHub>();
+            // Call the addStatistics method to update clients.
             hubContext.Clients.All.addStatistics(jsonStatistics, playerPercent, computerPercent, ticPercent, tacPercent);
         }
     }
