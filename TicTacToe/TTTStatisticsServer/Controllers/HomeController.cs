@@ -1,5 +1,7 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Web.Mvc;
+using TTTStatisticsLibrary;
 using TTTStatisticsServer.Models;
 
 namespace TTTStatisticsServer.Controllers
@@ -7,18 +9,20 @@ namespace TTTStatisticsServer.Controllers
     public class HomeController : Controller
     {
         [HttpGet]
-        [MethodImpl(MethodImplOptions.Synchronized)]
         public ViewResult Index()
         {
-
-            return View(StatisticsModels.GetFullStatistics());
+            List<Statistics> statisticsList = StatisticsModels.GetStatisticsList();
+            ViewBag.HumanPercent = StatisticsModels.CalculatePlayerPercent(statisticsList, Player.Human);
+            ViewBag.ComputerPercent = StatisticsModels.CalculatePlayerPercent(statisticsList, Player.Computer);
+            ViewBag.TicPercent = StatisticsModels.CalculateSidePercent(statisticsList, GameState.TicWon);
+            ViewBag.TacPercent = StatisticsModels.CalculateSidePercent(statisticsList, GameState.TacWon);
+            return View(statisticsList);
         }
 
         [HttpPost]
-        [MethodImpl(MethodImplOptions.Synchronized)]
         public string GetStatistics()
         {
-            return StatisticsModels.SerializeFullStatistics();
+            return StatisticsModels.ReadJsonFile();
         }
 
         [HttpPost]

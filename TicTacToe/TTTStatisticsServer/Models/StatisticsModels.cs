@@ -9,25 +9,12 @@ namespace TTTStatisticsServer.Models
 {
     public static class StatisticsModels
     {
-        public static FullStatistics GetFullStatistics()
-        {
-            List<Statistics> statisticsList = GetStatisticsList();
-            return new FullStatistics
-            {
-                StatisticsList = statisticsList,
-                PlayerWinPercent = statisticsList.Count == 0 ? 0 : statisticsList.Count(s => 
-                    ((s.GameResult == GameState.TicWon && s.TicPlayer == Player.Human) || 
-                    (s.GameResult == GameState.TacWon && s.TacPlayer == Player.Human))) * 100 / 
-                    statisticsList.Count
-            };
-        }
-
-        private static List<Statistics> GetStatisticsList()
+        public static List<Statistics> GetStatisticsList()
         {
             return JsonConvert.DeserializeObject<List<Statistics>>(ReadJsonFile()) ?? new List<Statistics>();
         }
 
-        private static string ReadJsonFile()
+        public static string ReadJsonFile()
         {
             try
             {
@@ -39,17 +26,25 @@ namespace TTTStatisticsServer.Models
             }
         }
 
-        public static string SerializeFullStatistics()
-        {
-            return JsonConvert.SerializeObject(GetFullStatistics());
-        }
-
         public static void AddStatistics(string jsonString)
         {
             List<Statistics> statistics = GetStatisticsList();
             statistics.Add(JsonConvert.DeserializeObject<Statistics>(jsonString));
             File.WriteAllText(HostingEnvironment.ApplicationPhysicalPath + @"\App_Data\Statistics.json",
                 JsonConvert.SerializeObject(statistics));
+        }
+
+        public static int CalculatePlayerPercent(List<Statistics> statisticsList, Player player)
+        {
+            if (statisticsList.Count == 0) return 0;
+            return statisticsList.Count(s => (s.TicPlayer == player && s.GameResult == GameState.TicWon) || 
+                (s.TacPlayer == player && s.GameResult == GameState.TacWon)) * 100 / statisticsList.Count;
+        }
+
+        public static int CalculateSidePercent(List<Statistics> statisticsList, GameState gameState)
+        {
+            if (statisticsList.Count == 0) return 0;
+            return statisticsList.Count(s => s.GameResult == gameState) * 100 / statisticsList.Count;
         }
     }
 }

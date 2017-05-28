@@ -78,9 +78,15 @@ namespace TicTacToe
         {
             try
             {
-                FullStatistics fullStatistics = StatisticsWrapper.GetStatistics(uriTextBox.Text);
-                statisticsDataGridView.DataSource = fullStatistics.StatisticsList;
-                percentLabel.Text = fullStatistics.PlayerWinPercent.ToString();
+                List<Statistics> statisticsList = StatisticsWrapper.GetStatistics(uriTextBox.Text);
+                statisticsDataGridView.DataSource = statisticsList;
+                int HumanWins = 0;
+                if (statisticsList.Count > 0)
+                    HumanWins = statisticsList.Count(s => (s.TicPlayer == Player.Human &&
+                        s.GameResult == GameState.TicWon) ||
+                        (s.TacPlayer == Player.Human &&
+                        s.GameResult == GameState.TacWon)) * 100 / statisticsList.Count;
+                percentLabel.Text = HumanWins + "%";
             }
             catch (Exception ex)
             {

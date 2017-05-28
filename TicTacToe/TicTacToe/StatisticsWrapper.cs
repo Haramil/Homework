@@ -19,11 +19,11 @@ namespace TicTacToe
             }
         }
 
-        public static FullStatistics GetStatistics(string uri)
+        public static List<Statistics> GetStatistics(string uri)
         {
             using (WebClient webClient = new WebClient())
             {
-                return JsonConvert.DeserializeObject<FullStatistics>(Encoding.UTF8.GetString(
+                return JsonConvert.DeserializeObject<List<Statistics>>(Encoding.UTF8.GetString(
                     webClient.UploadValues(uri + @"/Home/GetStatistics", new NameValueCollection())));
             }
         }

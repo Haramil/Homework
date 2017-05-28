@@ -1,10 +1,19 @@
-﻿@model TTTStatisticsLibrary.FullStatistics
+﻿@model List<TTTStatisticsLibrary.Statistics>
 
 @{
     ViewBag.Title = "Статистика";
 }
 <div class="alert alert-info" role="alert">
-    Процент побед пользователя: @Model.PlayerWinPercent
+    Процент побед человека: @ViewBag.HumanPercent%
+</div>
+<div class="alert alert-info" role="alert">
+    Процент побед компьютера: @ViewBag.ComputerPercent%
+</div>
+<div class="alert alert-info" role="alert">
+    Процент побед крестиков: @ViewBag.TicPercent%
+</div>
+<div class="alert alert-info" role="alert">
+    Процент побед ноликов: @ViewBag.TacPercent%
 </div>
 <div class="table-responsive">
     <table class="table table-bordered">
@@ -15,7 +24,7 @@
             <th>Игрок за нолики</th>
             <th>Результат игры</th>
         </tr>
-        @foreach (var statistic in Model.StatisticsList)
+        @foreach (var statistic in Model)
         {
             <tr>
                 <td>@statistic.GameDate</td>
