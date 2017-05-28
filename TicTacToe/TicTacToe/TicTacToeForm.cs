@@ -78,8 +78,10 @@ namespace TicTacToe
         {
             try
             {
+                // Запрос статистики от сервера и её отображение в DataGridView
                 List<Statistics> statisticsList = StatisticsWrapper.GetStatistics(uriTextBox.Text);
                 statisticsDataGridView.DataSource = statisticsList;
+                // Подсчёт процента побед человека
                 int HumanWins = 0;
                 if (statisticsList.Count > 0)
                     HumanWins = statisticsList.Count(s => (s.TicPlayer == Player.Human &&
