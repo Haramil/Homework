@@ -1,6 +1,7 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace TTTStatisticsLibrary
 {
@@ -12,6 +13,7 @@ namespace TTTStatisticsLibrary
         /// <summary>
         /// Дата сыгранной игры
         /// </summary>
+        [Key]
         public DateTime GameDate { get; set; }
 
         /// <summary>

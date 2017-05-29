@@ -22,7 +22,7 @@ namespace TTTStatisticsServer.Controllers
         [HttpPost]
         public string GetStatistics()
         {
-            return StatisticsModel.ReadJsonFile();
+            return StatisticsModel.ToJsonString();
         }
 
         [HttpPost]

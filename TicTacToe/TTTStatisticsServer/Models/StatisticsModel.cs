@@ -1,8 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.IO;
+using System.Data.Entity;
 using System.Linq;
-using System.Web.Hosting;
 using TTTStatisticsLibrary;
 using TTTStatisticsServer.Hubs;
 
@@ -14,46 +13,44 @@ namespace TTTStatisticsServer.Models
     public static class StatisticsModel
     {
         /// <summary>
-        /// Преобразует JSON-строку в список статистики
+        /// Считывает из БД статистику
         /// </summary>
         /// <returns>Список со статистикой</returns>
         public static List<Statistic> GetStatisticsList()
         {
-            return JsonConvert.DeserializeObject<List<Statistic>>(ReadJsonFile()) ?? new List<Statistic>();
-        }
-
-        /// <summary>
-        /// Считывает JSON-файл со статистикой
-        /// </summary>
-        /// <returns>Строка JSON</returns>
-        public static string ReadJsonFile()
-        {
-            try
+            using (StatisticsContext db = new StatisticsContext())
             {
-                return File.ReadAllText(HostingEnvironment.ApplicationPhysicalPath + @"\App_Data\Statistics.json");
-            }
-            catch
-            {
-                return string.Empty;
+                db.Statistics.Load();
+                return db.Statistics.Local.ToList();
             }
         }
 
         /// <summary>
-        /// Добавляет статистику сыгранной игры в JSON-файл
+        /// Добавляет статистику сыгранной игры в БД
         /// </summary>
         /// <param name="jsonString">Статистика сыгранной игры в виде JSON-строки</param>
         public static void AddStatistics(string jsonString)
         {
+            using (StatisticsContext db = new StatisticsContext())
+            {
+                db.Statistics.Add(JsonConvert.DeserializeObject<Statistic>(jsonString));
+                db.SaveChanges();
+            }
             List<Statistic> statistics = GetStatisticsList();
-            statistics.Add(JsonConvert.DeserializeObject<Statistic>(jsonString));
-            // Запись статистики в файл
-            File.WriteAllText(HostingEnvironment.ApplicationPhysicalPath + @"\App_Data\Statistics.json",
-                JsonConvert.SerializeObject(statistics));
             // Отправка статистики всем клиентам
             StatisticsHub.Broadcast(jsonString, CalculatePlayerPercent(statistics, Player.Human),
-                CalculatePlayerPercent(statistics, Player.Computer), 
-                CalculateSidePercent(statistics, GameState.TicWon), 
+                CalculatePlayerPercent(statistics, Player.Computer),
+                CalculateSidePercent(statistics, GameState.TicWon),
                 CalculateSidePercent(statistics, GameState.TacWon));
+        }
+
+        /// <summary>
+        /// Преобразует данные о статистике из БД в JSON-строку
+        /// </summary>
+        /// <returns>JSON-строка</returns>
+        public static string ToJsonString()
+        {
+            return JsonConvert.SerializeObject(GetStatisticsList());
         }
 
         /// <summary>
