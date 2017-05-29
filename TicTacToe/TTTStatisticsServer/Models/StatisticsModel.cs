@@ -13,7 +13,7 @@ namespace TTTStatisticsServer.Models
     public static class StatisticsModel
     {
         /// <summary>
-        /// Считывает из БД статистику
+        /// Считывает статистику из БД
         /// </summary>
         /// <returns>Список со статистикой</returns>
         public static List<Statistic> GetStatisticsList()

@@ -1,8 +1,8 @@
+using System.Data.Entity;
+using TTTStatisticsLibrary;
+
 namespace TTTStatisticsServer.Models
 {
-    using System.Data.Entity;
-    using TTTStatisticsLibrary;
-
     public partial class StatisticsContext : DbContext
     {
         public StatisticsContext() : base("name=StatisticsContext") { }
