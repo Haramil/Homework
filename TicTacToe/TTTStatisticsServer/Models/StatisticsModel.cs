@@ -4,19 +4,20 @@ using System.Data.Entity;
 using System.Linq;
 using TTTStatisticsLibrary;
 using TTTStatisticsServer.Hubs;
+using TTTStatisticsServer.Interfaces;
 
 namespace TTTStatisticsServer.Models
 {
     /// <summary>
     /// Модель StatisticsModel для работы со статистикой
     /// </summary>
-    public static class StatisticsModel
+    public class StatisticsModel : IStatisticsModel
     {
         /// <summary>
         /// Считывает статистику из БД
         /// </summary>
         /// <returns>Список со статистикой</returns>
-        public static List<Statistic> GetStatisticsList()
+        public List<Statistic> GetStatisticsList()
         {
             using (StatisticsContext db = new StatisticsContext())
             {
@@ -29,7 +30,7 @@ namespace TTTStatisticsServer.Models
         /// Добавляет статистику сыгранной игры в БД
         /// </summary>
         /// <param name="jsonString">Статистика сыгранной игры в виде JSON-строки</param>
-        public static void AddStatistics(string jsonString)
+        public void AddStatistics(string jsonString)
         {
             using (StatisticsContext db = new StatisticsContext())
             {
@@ -48,7 +49,7 @@ namespace TTTStatisticsServer.Models
         /// Преобразует данные о статистике из БД в JSON-строку
         /// </summary>
         /// <returns>JSON-строка</returns>
-        public static string ToJsonString()
+        public string ToJsonString()
         {
             return JsonConvert.SerializeObject(GetStatisticsList());
         }
@@ -59,7 +60,7 @@ namespace TTTStatisticsServer.Models
         /// <param name="statisticsList">Статистика</param>
         /// <param name="player">Чей процент считать</param>
         /// <returns>Процент побед</returns>
-        public static int CalculatePlayerPercent(List<Statistic> statisticsList, Player player)
+        public int CalculatePlayerPercent(List<Statistic> statisticsList, Player player)
         {
             if (statisticsList.Count == 0) return 0;
             return statisticsList.Count(s => (s.TicPlayer == player && s.GameResult == GameState.TicWon) || 
@@ -72,7 +73,7 @@ namespace TTTStatisticsServer.Models
         /// <param name="statisticsList">Статистика</param>
         /// <param name="gameState">Чей процент считать (если GameState.Draw, то ничьи)</param>
         /// <returns>Процент побед</returns>
-        public static int CalculateSidePercent(List<Statistic> statisticsList, GameState gameState)
+        public int CalculateSidePercent(List<Statistic> statisticsList, GameState gameState)
         {
             if (statisticsList.Count == 0) return 0;
             return statisticsList.Count(s => s.GameResult == gameState) * 100 / statisticsList.Count;

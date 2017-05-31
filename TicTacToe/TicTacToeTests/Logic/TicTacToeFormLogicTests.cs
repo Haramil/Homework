@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Ploeh.AutoFixture;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -40,7 +41,7 @@ namespace TicTacToe.Logic.Tests
         /// <summary>
         /// Юнит-тест для метода StartGame.
         /// Игра с компьютером, первым ходит компьютер.
-        /// Свойство CurrentSideState должно указывать на ход ноликов (CellState.Tac)
+        /// Свойство CurrentSideState должно указывать на ход ноликов (CellState.Tac), т.к. крестики уже сходили
         /// </summary>
         [TestMethod]
         public void StartGame_ComputerVsPlayer_CurrentSideIsTac()
@@ -177,14 +178,34 @@ namespace TicTacToe.Logic.Tests
         {
             // Arrange
             var logic = CreateLogic();
+            var cellNum = new Random().Next(0, 9);
 
             // Act
             logic.StartGame(false, false);
-            logic.PlayerMove(0);
-            logic.PlayerMove(0);
+            logic.PlayerMove(cellNum);
+            logic.PlayerMove(cellNum);
 
             // Assert
             // Ожидается CellNotEmptyException
+        }
+
+        /// <summary>
+        /// Юнит-тест для метода PlayerMove.
+        /// Игра человека и человека, игрок делает ход.
+        /// Ход игрока должен выполниться (ячейка, куда он сходил, должна стать занятой крестиком)
+        /// </summary>
+        [TestMethod]
+        public void PlayerMove_PlayerVsPlayer_PlayerMoveDone()
+        {
+            // Arrange
+            var logic = CreateLogic();
+
+            // Act
+            logic.StartGame(false, false);
+            logic.PlayerMove(4);
+
+            // Assert
+            Assert.AreEqual(logic.CellList[4].CellState, CellState.Tic);
         }
     }
 }

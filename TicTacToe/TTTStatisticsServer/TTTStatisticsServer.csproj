@@ -170,6 +170,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Hubs\StatisticsHub.cs" />
+    <Compile Include="Interfaces\IStatisticsModel.cs" />
     <Compile Include="Models\StatisticsContext.cs" />
     <Compile Include="Models\StatisticsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
