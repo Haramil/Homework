@@ -79,7 +79,7 @@ namespace TicTacToe
             try
             {
                 // Запрос статистики от сервера и её отображение в DataGridView
-                List<Statistics> statisticsList = StatisticsWrapper.GetStatistics(uriTextBox.Text);
+                List<Statistic> statisticsList = StatisticsWrapper.GetStatistics(uriTextBox.Text);
                 statisticsDataGridView.DataSource = statisticsList;
                 // Подсчёт процента побед человека
                 int HumanWins = 0;

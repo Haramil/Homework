@@ -207,7 +207,7 @@ namespace TicTacToe
                 case GameState.Draw:
                 case GameState.TicWon:
                 case GameState.TacWon:
-                    StatisticsWrapper.SendGameResult(addressTextBox.Text, new Statistics
+                    StatisticsWrapper.SendGameResult(addressTextBox.Text, new Statistic
                     {
                         GameDate = DateTime.Now,
                         GameResult = finalState,

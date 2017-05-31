@@ -7,7 +7,7 @@ namespace TTTStatisticsLibrary
     /// <summary>
     /// Статистика сыгранной игры
     /// </summary>
-    public class Statistics
+    public class Statistic
     {
         /// <summary>
         /// Дата сыгранной игры

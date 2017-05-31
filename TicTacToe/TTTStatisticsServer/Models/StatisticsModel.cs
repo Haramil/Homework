@@ -17,9 +17,9 @@ namespace TTTStatisticsServer.Models
         /// Преобразует JSON-строку в список статистики
         /// </summary>
         /// <returns>Список со статистикой</returns>
-        public static List<Statistics> GetStatisticsList()
+        public static List<Statistic> GetStatisticsList()
         {
-            return JsonConvert.DeserializeObject<List<Statistics>>(ReadJsonFile()) ?? new List<Statistics>();
+            return JsonConvert.DeserializeObject<List<Statistic>>(ReadJsonFile()) ?? new List<Statistic>();
         }
 
         /// <summary>
@@ -44,8 +44,8 @@ namespace TTTStatisticsServer.Models
         /// <param name="jsonString">Статистика сыгранной игры в виде JSON-строки</param>
         public static void AddStatistics(string jsonString)
         {
-            List<Statistics> statistics = GetStatisticsList();
-            statistics.Add(JsonConvert.DeserializeObject<Statistics>(jsonString));
+            List<Statistic> statistics = GetStatisticsList();
+            statistics.Add(JsonConvert.DeserializeObject<Statistic>(jsonString));
             // Запись статистики в файл
             File.WriteAllText(HostingEnvironment.ApplicationPhysicalPath + @"\App_Data\Statistics.json",
                 JsonConvert.SerializeObject(statistics));
@@ -62,7 +62,7 @@ namespace TTTStatisticsServer.Models
         /// <param name="statisticsList">Статистика</param>
         /// <param name="player">Чей процент считать</param>
         /// <returns>Процент побед</returns>
-        public static int CalculatePlayerPercent(List<Statistics> statisticsList, Player player)
+        public static int CalculatePlayerPercent(List<Statistic> statisticsList, Player player)
         {
             if (statisticsList.Count == 0) return 0;
             return statisticsList.Count(s => (s.TicPlayer == player && s.GameResult == GameState.TicWon) || 
@@ -75,7 +75,7 @@ namespace TTTStatisticsServer.Models
         /// <param name="statisticsList">Статистика</param>
         /// <param name="gameState">Чей процент считать (если GameState.Draw, то ничьи)</param>
         /// <returns>Процент побед</returns>
-        public static int CalculateSidePercent(List<Statistics> statisticsList, GameState gameState)
+        public static int CalculateSidePercent(List<Statistic> statisticsList, GameState gameState)
         {
             if (statisticsList.Count == 0) return 0;
             return statisticsList.Count(s => s.GameResult == gameState) * 100 / statisticsList.Count;

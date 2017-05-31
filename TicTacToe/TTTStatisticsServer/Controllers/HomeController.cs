@@ -11,7 +11,7 @@ namespace TTTStatisticsServer.Controllers
         [HttpGet]
         public ViewResult Index()
         {
-            List<Statistics> statisticsList = StatisticsModel.GetStatisticsList();
+            List<Statistic> statisticsList = StatisticsModel.GetStatisticsList();
             ViewBag.HumanPercent = StatisticsModel.CalculatePlayerPercent(statisticsList, Player.Human);
             ViewBag.ComputerPercent = StatisticsModel.CalculatePlayerPercent(statisticsList, Player.Computer);
             ViewBag.TicPercent = StatisticsModel.CalculateSidePercent(statisticsList, GameState.TicWon);

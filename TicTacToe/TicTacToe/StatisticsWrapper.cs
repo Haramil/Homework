@@ -17,7 +17,7 @@ namespace TicTacToe
         /// </summary>
         /// <param name="uri">URI сервера статистики</param>
         /// <param name="gameResult">Статистика игры</param>
-        public static void SendGameResult(string uri, Statistics gameResult)
+        public static void SendGameResult(string uri, Statistic gameResult)
         {
             using (WebClient webClient = new WebClient())
             {
@@ -33,11 +33,11 @@ namespace TicTacToe
         /// </summary>
         /// <param name="uri">URI сервера статистики</param>
         /// <returns>Статистика</returns>
-        public static List<Statistics> GetStatistics(string uri)
+        public static List<Statistic> GetStatistics(string uri)
         {
             using (WebClient webClient = new WebClient())
             {
-                return JsonConvert.DeserializeObject<List<Statistics>>(Encoding.UTF8.GetString(
+                return JsonConvert.DeserializeObject<List<Statistic>>(Encoding.UTF8.GetString(
                     webClient.UploadValues(uri + @"/Home/GetStatistics", new NameValueCollection())));
             }
         }
