@@ -1,7 +1,7 @@
-﻿@model List<TTTStatisticsLibrary.Statistics>
+﻿@model List<TTTStatisticsLibrary.Statistic>
 
 @{
-    ViewBag.Title = "Статистика";
+    ViewBag.Title = "Статистика игры Tic-Tac-Toe";
 }
 <div class="alert alert-info" role="alert" id="human">
     Процент побед человека: @ViewBag.HumanPercent%
@@ -10,31 +10,38 @@
     Процент побед компьютера: @ViewBag.ComputerPercent%
 </div>
 <div class="alert alert-info" role="alert" id="tic">
-    Процент побед крестиков: @ViewBag.TicPercent%
+    Процент побед крестиков (Tic): @ViewBag.TicPercent%
 </div>
 <div class="alert alert-info" role="alert" id="tac">
-    Процент побед ноликов: @ViewBag.TacPercent%
+    Процент побед ноликов (Tac): @ViewBag.TacPercent%
 </div>
-<div class="table-responsive">
-    <table class="table table-bordered" id="statsTable">
-        <tr>
-            <th>Дата и время игры</th>
-            <th>Число ходов</th>
-            <th>Игрок за крестики</th>
-            <th>Игрок за нолики</th>
-            <th>Результат игры</th>
-        </tr>
-        @foreach (var statistic in Model)
-        {
-            <tr>
-                <td>@statistic.GameDate</td>
-                <td>@statistic.MovesCount</td>
-                <td>@statistic.TicPlayer</td>
-                <td>@statistic.TacPlayer</td>
-                <td>@statistic.GameResult</td>
-            </tr>
-        }
-    </table>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        Статистика игр
+    </div>
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="statsTable">
+                <tr>
+                    <th>Дата и время игры</th>
+                    <th>Число ходов</th>
+                    <th>Игрок за крестики (Tic)</th>
+                    <th>Игрок за нолики (Tac)</th>
+                    <th>Результат игры</th>
+                </tr>
+                @foreach (var statistic in Model)
+            {
+                    <tr>
+                        <td>@statistic.GameDate</td>
+                        <td>@statistic.MovesCount</td>
+                        <td>@statistic.TicPlayer</td>
+                        <td>@statistic.TacPlayer</td>
+                        <td>@statistic.GameResult</td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
 </div>
 
 @section scripts {
@@ -57,8 +64,8 @@
                     "</tr>");
                 $("#human").html("Процент побед человека: " + playerPercent + "%");
                 $("#computer").html("Процент побед компьютера: " + computerPercent + "%");
-                $("#tic").html("Процент побед крестиков: " + ticPercent + "%");
-                $("#tac").html("Процент побед ноликов: " + tacPercent + "%");
+                $("#tic").html("Процент побед крестиков (Tic): " + ticPercent + "%");
+                $("#tac").html("Процент побед ноликов (Tac): " + tacPercent + "%");
             };
             // Start the connection.
             $.connection.hub.start();
