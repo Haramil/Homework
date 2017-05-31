@@ -200,12 +200,15 @@ namespace TicTacToe
         /// <param name="finalState">Итоговое состояние игры</param>
         public override void StopGame(GameState finalState)
         {
+            GameState = finalState;
+            CurrentSideState = CellState.Empty;
             switch (finalState)
             {
                 case GameState.Draw:
                 case GameState.TicWon:
                 case GameState.TacWon:
-                    StatisticsWrapper.SendGameResult(addressTextBox.Text, new Statistics {
+                    StatisticsWrapper.SendGameResult(addressTextBox.Text, new Statistics
+                    {
                         GameDate = DateTime.Now,
                         GameResult = finalState,
                         MovesCount = cellList.Count(c => c.CellState != CellState.Empty),
@@ -216,8 +219,6 @@ namespace TicTacToe
                 default:
                     break;
             }
-            GameState = finalState;
-            CurrentSideState = CellState.Empty;
         }
     }
 }
