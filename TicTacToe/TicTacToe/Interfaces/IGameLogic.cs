@@ -5,7 +5,7 @@ namespace TicTacToe.Interfaces
     /// <summary>
     /// Интерфейс игровой логики
     /// </summary>
-    interface IGameLogic
+    public interface IGameLogic
     {
         /// <summary>
         /// Запускает игру

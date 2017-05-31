@@ -10,12 +10,12 @@ namespace TicTacToe.Logic
     /// <summary>
     /// Представляет логику игры "Крестики-нолики"
     /// </summary>
-    abstract class TicTacToeLogic : IGameLogic
+    public abstract class TicTacToeLogic : IGameLogic
     {
         /// <summary>
         /// Представляет сведения о ячейке поля игры
         /// </summary>
-        protected class Cell
+        public class Cell
         {
             /// <summary>
             /// Указывает, какие линии занимает ячейка
@@ -169,7 +169,7 @@ namespace TicTacToe.Logic
     /// <summary>
     /// Возможные состояния ячейки
     /// </summary>
-    enum CellState
+    public enum CellState
     {
         /// <summary>
         /// Пустая ячейка

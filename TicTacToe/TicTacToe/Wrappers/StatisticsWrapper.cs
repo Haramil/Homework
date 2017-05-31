@@ -3,21 +3,22 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Net;
 using System.Text;
+using TicTacToe.Interfaces;
 using TTTStatisticsLibrary;
 
-namespace TicTacToe
+namespace TicTacToe.Wrappers
 {
     /// <summary>
-    /// Статический класс, служит для отправки и получения статистики от сервера
+    /// Класс, служащий для отправки и получения статистики от сервера
     /// </summary>
-    static class StatisticsWrapper
+    public class StatisticsWrapper : IStatisticsWrapper
     {
         /// <summary>
         /// Отправляет статистику сыгранной игры в формате JSON
         /// </summary>
         /// <param name="uri">URI сервера статистики</param>
         /// <param name="gameResult">Статистика игры</param>
-        public static void SendGameResult(string uri, Statistic gameResult)
+        public void SendGameResult(string uri, Statistic gameResult)
         {
             using (WebClient webClient = new WebClient())
             {
@@ -33,7 +34,7 @@ namespace TicTacToe
         /// </summary>
         /// <param name="uri">URI сервера статистики</param>
         /// <returns>Статистика</returns>
-        public static List<Statistic> GetStatistics(string uri)
+        public List<Statistic> GetStatistics(string uri)
         {
             using (WebClient webClient = new WebClient())
             {

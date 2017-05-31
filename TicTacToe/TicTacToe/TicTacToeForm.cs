@@ -7,20 +7,25 @@ using System.Windows.Forms;
 using TicTacToe.Exceptions;
 using TicTacToe.Logic;
 using TTTStatisticsLibrary;
+using TicTacToe.Wrappers;
 
 namespace TicTacToe
 {
     public partial class TicTacToeForm : Form
     {
         TicTacToeFormLogic logic;
+        StatisticsWrapper wrapper;
 
         public TicTacToeForm()
         {
             InitializeComponent();
+            // Создаём экземпляр класса StatisticsWrapper
+            wrapper = new StatisticsWrapper();
             // Создаем экземпляр класса TicTacToeFormLogic,
-            // передаем в него множество с кнопками и лейблы для вывода информации
+            // передаем в него множество с кнопками, лейблы для вывода информации, изображения для ячеек и объект wrapper
             logic = new TicTacToeFormLogic(new HashSet<Button>(gameFieldGroupBox.Controls.Cast<Button>()), 
-                currentSideLabel, resultLabel, uriTextBox);
+                currentSideLabel, resultLabel, uriTextBox, Properties.Resources.X, Properties.Resources.O, 
+                Properties.Resources.Empty, wrapper);
         }
 
         private void singlePlayerRadioButton_CheckedChanged(object sender, EventArgs e)
@@ -81,7 +86,7 @@ namespace TicTacToe
             try
             {
                 // Запрос статистики от сервера и её отображение в DataGridView
-                List<Statistic> statisticsList = StatisticsWrapper.GetStatistics(uriTextBox.Text);
+                List<Statistic> statisticsList = wrapper.GetStatistics(uriTextBox.Text);
                 statisticsDataGridView.DataSource = statisticsList;
                 // Подсчёт процента побед человека
                 int HumanWins = 0;

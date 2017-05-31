@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using TicTacToe.Interfaces;
 using TTTStatisticsLibrary;
 
 namespace TicTacToe.Logic
@@ -10,7 +11,7 @@ namespace TicTacToe.Logic
     /// <summary>
     /// Представляет логику игры "Крестики-нолики" для формы TicTacToeForm
     /// </summary>
-    class TicTacToeFormLogic : TicTacToeLogic
+    public class TicTacToeFormLogic : TicTacToeLogic
     {
         /// <summary>
         /// Объект класса Label, куда выводится информация о том, кто сейчас ходит
@@ -35,28 +36,33 @@ namespace TicTacToe.Logic
         /// <summary>
         /// Изображение пустой ячейки
         /// </summary>
-        private Image Empty = Properties.Resources.Empty;
+        private Image emptyImage;
 
         /// <summary>
         /// Изображение крестика
         /// </summary>
-        private Image X = Properties.Resources.X;
+        private Image ticImage;
 
         /// <summary>
         /// Изображение нолика
         /// </summary>
-        private Image O = Properties.Resources.O;
+        private Image tacImage;
+
+        /// <summary>
+        /// Служит для отправки статистики на сервер
+        /// </summary>
+        private IStatisticsWrapper statisticsWrapper;
 
         /// <summary>
         /// Указывает состояние игры
         /// </summary>
-        private GameState GameState
+        public GameState GameState
         {
             get
             {
                 return gameState;
             }
-            set // В resultLabel выводится состояние игры
+            private set // В resultLabel выводится состояние игры
             {
                 switch (value)
                 {
@@ -83,13 +89,13 @@ namespace TicTacToe.Logic
         /// <summary>
         /// Указывает текущую сторону
         /// </summary>
-        private CellState CurrentSideState
+        public CellState CurrentSideState
         {
             get
             {
                 return currentSideState;
             }
-            set // В sideLabel выводится, кто сейчас ходит
+            private set // В sideLabel выводится, кто сейчас ходит
             {
                 switch (value)
                 {
@@ -108,19 +114,38 @@ namespace TicTacToe.Logic
         }
 
         /// <summary>
+        /// Представляет список ячеек поля
+        /// </summary>
+        public List<Cell> CellList
+        {
+            get
+            {
+                return new List<Cell>(cellList);
+            }
+        }
+
+        /// <summary>
         /// Инициализирует новый экземпляр класса TicTacToeFormLogic
         /// </summary>
         /// <param name="cellButtonSet">Хэшированное множество объектов класса Button, представляющих ячейки игрового поля</param>
         /// <param name="sideLabel">Объект класса Label, куда будет выводиться информация о том, кто сейчас ходит</param>
         /// <param name="resultLabel">Объект класса Label, куда будет выводиться информация о результате игры</param>
         /// <param name="addressTextBox">Объект класса TextBox, в котором записан URI сервера со статистикой</param>
+        /// <param name="ticImage">Изображение крестика</param>
+        /// <param name="tacImage">Изображение нолика</param>
+        /// <param name="emptyImage">Изображение пустой ячейки</param>
+        /// <param name="statisticsWrapper">Служит для отправки статистики на сервер</param>
         public TicTacToeFormLogic(HashSet<Button> cellButtonSet, Label sideLabel, Label resultLabel,
-            TextBox addressTextBox) : base()
+            TextBox addressTextBox, Image ticImage, Image tacImage, Image emptyImage, IStatisticsWrapper statisticsWrapper) : base()
         {   
             this.cellButtonSet = cellButtonSet;
             this.sideLabel = sideLabel;
             this.resultLabel = resultLabel;
             this.addressTextBox = addressTextBox;
+            this.ticImage = ticImage;
+            this.tacImage = tacImage;
+            this.emptyImage = emptyImage;
+            this.statisticsWrapper = statisticsWrapper;
         }
 
         /// <summary>
@@ -134,7 +159,7 @@ namespace TicTacToe.Logic
             for (int i = 0; i < cellList.Count; i++) // Очищаем все ячейки поля
             {
                 cellList[i].CellState = CellState.Empty;
-                cellButtonSet.FirstOrDefault(b => b.TabIndex == i).BackgroundImage = Empty;
+                cellButtonSet.FirstOrDefault(b => b.TabIndex == i).BackgroundImage = emptyImage;
             }
             CurrentSideState = CellState.Tic; // Первыми ходят крестики
             GameState = GameState.InProgress; // Состояние "в процессе"
@@ -160,7 +185,7 @@ namespace TicTacToe.Logic
             // Если есть - заканчиваем игру (победа крестиков или ноликов)
             {
                 case CellState.Tic:
-                    selectedButton.BackgroundImage = X;
+                    selectedButton.BackgroundImage = ticImage;
                     foreach (byte line in selectedCell.CellLines)
                     {
                         lineStates[line]++;
@@ -172,7 +197,7 @@ namespace TicTacToe.Logic
                     }
                     break;
                 case CellState.Tac:
-                    selectedButton.BackgroundImage = O;
+                    selectedButton.BackgroundImage = tacImage;
                     foreach (byte line in selectedCell.CellLines)
                     {
                         lineStates[line]--;
@@ -207,7 +232,7 @@ namespace TicTacToe.Logic
                 case GameState.Draw:
                 case GameState.TicWon:
                 case GameState.TacWon:
-                    StatisticsWrapper.SendGameResult(addressTextBox.Text, new Statistic
+                    statisticsWrapper.SendGameResult(addressTextBox.Text, new Statistic
                     {
                         GameDate = DateTime.Now,
                         GameResult = finalState,
