@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TTTStatisticsServer", "TTTS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicTacToeTests", "TicTacToeTests\TicTacToeTests.csproj", "{694717DC-E573-4D2C-B8B3-CDFED74B55B8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TTTStatisticsServerTests", "TTTStatisticsServerTests\TTTStatisticsServerTests.csproj", "{D144148E-FD0A-487D-8413-7BE6347B3069}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{694717DC-E573-4D2C-B8B3-CDFED74B55B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{694717DC-E573-4D2C-B8B3-CDFED74B55B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{694717DC-E573-4D2C-B8B3-CDFED74B55B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D144148E-FD0A-487D-8413-7BE6347B3069}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D144148E-FD0A-487D-8413-7BE6347B3069}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D144148E-FD0A-487D-8413-7BE6347B3069}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D144148E-FD0A-487D-8413-7BE6347B3069}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

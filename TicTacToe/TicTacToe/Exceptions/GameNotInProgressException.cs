@@ -6,7 +6,7 @@ namespace TicTacToe.Exceptions
     /// <summary>
     /// Исключение, которое возникает, когда игрок хочет сходить, в то время как игра закончена или остановлена
     /// </summary>
-    class GameNotInProgressException : Exception
+    public class GameNotInProgressException : Exception
     {
         /// <summary>
         /// Указывает текущее состояние игры

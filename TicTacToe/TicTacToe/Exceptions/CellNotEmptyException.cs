@@ -5,7 +5,7 @@ namespace TicTacToe.Exceptions
     /// <summary>
     /// Исключение, которое возникает, когда игрок хочет сходить в непустую ячейку
     /// </summary>
-    class CellNotEmptyException : Exception
+    public class CellNotEmptyException : Exception
     {
         /// <summary>
         /// Указывает, какой горизонтали принадлежит ячейка
