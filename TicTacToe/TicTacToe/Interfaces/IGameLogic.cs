@@ -1,6 +1,6 @@
 ﻿using TTTStatisticsLibrary;
 
-namespace TicTacToe
+namespace TicTacToe.Interfaces
 {
     /// <summary>
     /// Интерфейс игровой логики

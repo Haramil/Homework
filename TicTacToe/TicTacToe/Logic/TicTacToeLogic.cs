@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TicTacToe.Exceptions;
+using TicTacToe.Interfaces;
 using TTTStatisticsLibrary;
 
-namespace TicTacToe
+namespace TicTacToe.Logic
 {
     /// <summary>
     /// Представляет логику игры "Крестики-нолики"

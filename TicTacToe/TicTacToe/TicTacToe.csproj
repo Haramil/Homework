@@ -50,12 +50,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CellNotEmptyException.cs" />
+    <Compile Include="Exceptions\CellNotEmptyException.cs" />
     <Compile Include="StatisticsWrapper.cs" />
-    <Compile Include="TicTacToeFormLogic.cs" />
-    <Compile Include="TicTacToeLogic.cs" />
-    <Compile Include="GameNotInProgressException.cs" />
-    <Compile Include="IGameLogic.cs" />
+    <Compile Include="Logic\TicTacToeFormLogic.cs" />
+    <Compile Include="Logic\TicTacToeLogic.cs" />
+    <Compile Include="Exceptions\GameNotInProgressException.cs" />
+    <Compile Include="Interfaces\IGameLogic.cs" />
     <Compile Include="TicTacToeForm.cs">
       <SubType>Form</SubType>
     </Compile>

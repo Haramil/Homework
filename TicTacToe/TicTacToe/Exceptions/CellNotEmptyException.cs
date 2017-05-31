@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TicTacToe
+namespace TicTacToe.Exceptions
 {
     /// <summary>
     /// Исключение, которое возникает, когда игрок хочет сходить в непустую ячейку

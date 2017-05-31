@@ -1,7 +1,7 @@
 ﻿using System;
 using TTTStatisticsLibrary;
 
-namespace TicTacToe
+namespace TicTacToe.Exceptions
 {
     /// <summary>
     /// Исключение, которое возникает, когда игрок хочет сходить, в то время как игра закончена или остановлена

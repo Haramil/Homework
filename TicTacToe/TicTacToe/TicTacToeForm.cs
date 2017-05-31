@@ -4,6 +4,8 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using TicTacToe.Exceptions;
+using TicTacToe.Logic;
 using TTTStatisticsLibrary;
 
 namespace TicTacToe

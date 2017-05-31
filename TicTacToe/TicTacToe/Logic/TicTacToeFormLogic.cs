@@ -5,7 +5,7 @@ using System.Linq;
 using System.Windows.Forms;
 using TTTStatisticsLibrary;
 
-namespace TicTacToe
+namespace TicTacToe.Logic
 {
     /// <summary>
     /// Представляет логику игры "Крестики-нолики" для формы TicTacToeForm
