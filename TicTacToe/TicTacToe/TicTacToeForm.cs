@@ -6,8 +6,8 @@ using System.Linq;
 using System.Windows.Forms;
 using TicTacToe.Exceptions;
 using TicTacToe.Logic;
-using TTTStatisticsLibrary;
 using TicTacToe.Wrappers;
+using TTTStatisticsLibrary;
 
 namespace TicTacToe
 {

@@ -227,6 +227,7 @@ namespace TicTacToe.Logic
         {
             GameState = finalState;
             CurrentSideState = CellState.Empty;
+            // Отправка статистики сыгранной игры серверу
             switch (finalState)
             {
                 case GameState.Draw:

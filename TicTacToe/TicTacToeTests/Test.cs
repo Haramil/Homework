@@ -11,6 +11,10 @@ namespace TicTacToeTests
 {
     static class Test
     {
+        /// <summary>
+        /// Создает экземпляр класса TicTacToeFormLogic, взаимодействующий со Stub- и Mock- объектами
+        /// </summary>
+        /// <returns>Рабочий экземпляр класса TicTacToeFormLogic</returns>
         public static TicTacToeFormLogic CreateLogic()
         {
             var cellButtonsSetStub = new HashSet<Button>();
