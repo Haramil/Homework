@@ -24,7 +24,7 @@ namespace TicTacToe.Interfaces
         /// Осуществляет ход игрока
         /// </summary>
         /// <param name="cellNum">Номер ячейки, в которую сходил игрок</param>
-        void PlayerMove(int cellNum);
+        void PlayerMove(byte cellNum);
 
         /// <summary>
         /// Осуществляет ход компьютера

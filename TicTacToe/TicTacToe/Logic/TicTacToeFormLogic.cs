@@ -29,9 +29,9 @@ namespace TicTacToe.Logic
         private TextBox addressTextBox;
 
         /// <summary>
-        /// Хэшированное множество объектов класса Button, представляющих ячейки игрового поля
+        /// Словарь ячеек игрового поля
         /// </summary>
-        private HashSet<Button> cellButtonSet;
+        private Dictionary<byte, Button> cellButtonsDict;
 
         /// <summary>
         /// Изображение пустой ячейки
@@ -114,20 +114,9 @@ namespace TicTacToe.Logic
         }
 
         /// <summary>
-        /// Представляет список ячеек поля
-        /// </summary>
-        public List<Cell> CellList
-        {
-            get
-            {
-                return new List<Cell>(cellList);
-            }
-        }
-
-        /// <summary>
         /// Инициализирует новый экземпляр класса TicTacToeFormLogic
         /// </summary>
-        /// <param name="cellButtonSet">Хэшированное множество объектов класса Button, представляющих ячейки игрового поля</param>
+        /// <param name="cellButtonsDict">Словарь ячеек игрового поля</param>
         /// <param name="sideLabel">Объект класса Label, куда будет выводиться информация о том, кто сейчас ходит</param>
         /// <param name="resultLabel">Объект класса Label, куда будет выводиться информация о результате игры</param>
         /// <param name="addressTextBox">Объект класса TextBox, в котором записан URI сервера со статистикой</param>
@@ -135,10 +124,20 @@ namespace TicTacToe.Logic
         /// <param name="tacImage">Изображение нолика</param>
         /// <param name="emptyImage">Изображение пустой ячейки</param>
         /// <param name="statisticsWrapper">Служит для отправки статистики на сервер</param>
-        public TicTacToeFormLogic(HashSet<Button> cellButtonSet, Label sideLabel, Label resultLabel,
+        public TicTacToeFormLogic(Dictionary<byte, Button> cellButtonsDict, Label sideLabel, Label resultLabel,
             TextBox addressTextBox, Image ticImage, Image tacImage, Image emptyImage, IStatisticsWrapper statisticsWrapper) : base()
-        {   
-            this.cellButtonSet = cellButtonSet;
+        {
+            // Словарь кнопок должен содержать ровно 9 кнопок для ячеек поля
+            // Их номера должны отражать их позицию на игровом поле:
+            //
+            //   0 | 1 | 2 
+            //  ---+---+---
+            //   3 | 4 | 5 
+            //  ---+---+---
+            //   6 | 7 | 8 
+            //
+            this.cellButtonsDict = cellButtonsDict;
+
             this.sideLabel = sideLabel;
             this.resultLabel = resultLabel;
             this.addressTextBox = addressTextBox;
@@ -156,10 +155,10 @@ namespace TicTacToe.Logic
         public override void StartGame(bool isSinglePlayer, bool isPlayerSecond)
         {
             lineStates = new sbyte[8]; // Очищаем состояния линий поля
-            for (int i = 0; i < cellList.Count; i++) // Очищаем все ячейки поля
+            for (byte i = 0; i < cellList.Count; i++) // Очищаем все ячейки поля
             {
                 cellList[i].CellState = CellState.Empty;
-                cellButtonSet.FirstOrDefault(b => b.TabIndex == i).BackgroundImage = emptyImage;
+                cellButtonsDict[i].BackgroundImage = emptyImage;
             }
             CurrentSideState = CellState.Tic; // Первыми ходят крестики
             GameState = GameState.InProgress; // Состояние "в процессе"
@@ -174,10 +173,10 @@ namespace TicTacToe.Logic
         /// Осуществляет обработку хода
         /// </summary>
         /// <param name="cellNum">Номер ячейки, в которую сходили</param>
-        protected override void Move(int cellNum)
+        protected override void Move(byte cellNum)
         {
             Cell selectedCell = cellList[cellNum];
-            Button selectedButton = cellButtonSet.FirstOrDefault(b => b.TabIndex == cellNum);
+            Button selectedButton = cellButtonsDict[cellNum];
             selectedCell.CellState = currentSideState; // Устанавливаем состояние выбранной ячейки
             switch (currentSideState)
             // Меняем состояния линий поля, которым принадлежит ячейка

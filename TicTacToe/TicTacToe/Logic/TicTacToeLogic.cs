@@ -47,9 +47,20 @@ namespace TicTacToe.Logic
         }
 
         /// <summary>
-        /// Представляет список ячеек поля
+        /// Поле, представляющее список ячеек поля
         /// </summary>
         protected List<Cell> cellList;
+
+        /// <summary>
+        /// Свойство, представляющее список ячеек поля
+        /// </summary>
+        public List<Cell> CellList
+        {
+            get
+            {
+                return new List<Cell>(cellList);
+            }
+        }
 
         /// <summary>
         /// Представляет состояние каждой линии поля
@@ -110,13 +121,13 @@ namespace TicTacToe.Logic
         /// Осуществляет обработку хода
         /// </summary>
         /// <param name="cellNum">Номер ячейки, в которую сходили</param>
-        protected abstract void Move(int cellNum);
+        protected abstract void Move(byte cellNum);
 
         /// <summary>
         /// Осуществляет ход игрока
         /// </summary>
         /// <param name="cellNum">Номер ячейки, в которую сходил игрок</param>
-        public void PlayerMove(int cellNum)
+        public void PlayerMove(byte cellNum)
         {
             Cell selectedCell = cellList[cellNum];
             if (gameState != GameState.InProgress) // Игра остановлена
@@ -145,9 +156,9 @@ namespace TicTacToe.Logic
                 // Среди них находим важные ячейки
                 IEnumerable<Cell> importantCells = availableCells.Where(c => CheckImportantCell(c));
                 if (importantCells.Count() > 0)
-                    Move(cellList.IndexOf(importantCells.ElementAt(rand.Next(0, importantCells.Count()))));
+                    Move((byte)cellList.IndexOf(importantCells.ElementAt(rand.Next(0, importantCells.Count()))));
                 else
-                    Move(cellList.IndexOf(availableCells.ElementAt(rand.Next(0, availableCells.Count()))));
+                    Move((byte)cellList.IndexOf(availableCells.ElementAt(rand.Next(0, availableCells.Count()))));
             }
         }
 

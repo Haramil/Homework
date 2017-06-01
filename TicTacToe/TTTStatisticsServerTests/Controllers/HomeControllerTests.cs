@@ -1,5 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
+using Ploeh.AutoFixture;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using TTTStatisticsLibrary;
 using TTTStatisticsServer.Interfaces;
 
@@ -36,7 +40,7 @@ namespace TTTStatisticsServer.Controllers.Tests
             /// <returns>Список со статистикой</returns>
             public List<Statistic> GetStatisticsList()
             {
-                // Возвращает список статистики testStatisticsList
+                // Считывает статистику из БД и возвращает список List<Statistic>
                 return testStatisticsList;
             }
 
@@ -47,6 +51,7 @@ namespace TTTStatisticsServer.Controllers.Tests
             public void AddStatistics(string jsonString)
             {
                 // Добавление статистики сыгранной игры в БД
+                testStatisticsList.Add(JsonConvert.DeserializeObject<Statistic>(jsonString));
             }
 
             /// <summary>
@@ -56,7 +61,7 @@ namespace TTTStatisticsServer.Controllers.Tests
             public string ToJsonString()
             {
                 // Преобразование статистики из БД в строку JSON
-                return string.Empty;
+                return JsonConvert.SerializeObject(testStatisticsList);
             }
 
             /// <summary>
@@ -67,8 +72,7 @@ namespace TTTStatisticsServer.Controllers.Tests
             /// <returns>Процент побед</returns>
             public int CalculatePlayerPercent(List<Statistic> statisticsList, Player player)
             {
-                // Возвращает 0
-                return 0;
+                return new Random().Next(0, 101);
             }
 
             /// <summary>
@@ -80,21 +84,20 @@ namespace TTTStatisticsServer.Controllers.Tests
             public int CalculateSidePercent(List<Statistic> statisticsList, GameState gameState)
             {
                 // Возвращает 0
-                return 0;
+                return new Random().Next(0, 101);
             }
         }
 
         /// <summary>
         /// Юнит-тест для метода Index.
-        /// Метод создаёт объект класса ViewResult, в качестве модели - список статистики, возвращаемый методом GetStatisticsList
-        ///     Stub-объекта класса StatisticsModelStub
+        /// Метод передаёт в представление список статистики, полученный из модели (Stub-объекта StatisticsModelStub).
         /// Списки статистики testingStatisticsList и viewResult.Model должны совпадать
         /// </summary>
         [TestMethod]
-        public void Index_WithStubModel_ReturnsValidView()
+        public void Index_WithStubModel_ReturnsViewWithValidModel()
         {
             // Arrange
-            var testingStatisticsList = new List<Statistic>();
+            var testingStatisticsList = new Fixture().Create<List<Statistic>>();
             var statisticsModelStub = new StatisticsModelStub(testingStatisticsList);
             var homeController = new HomeController(statisticsModelStub);
 
@@ -102,7 +105,31 @@ namespace TTTStatisticsServer.Controllers.Tests
             var viewResult = homeController.Index();
 
             // Assert
-            ReferenceEquals(testingStatisticsList, viewResult.Model);
+            CollectionAssert.AreEqual(testingStatisticsList, viewResult.Model as List<Statistic>);
+        }
+
+        /// <summary>
+        /// Юнит-тест для метода SetStatistics.
+        /// Метод добавляет полученную статистику в список статистики модели.
+        /// В список testingStatisticsList должна быть добавлена новая статистика (проверяется совпадение даты игры)
+        /// </summary>
+        [TestMethod]
+        public void SetStatistics_WithStubModel_StatisticsAdded()
+        {
+            // Arrange
+            var fixture = new Fixture();
+            var testingStatisticsList = fixture.Create<List<Statistic>>();
+            var date = fixture.Create<DateTime>();
+            var addingStatistic = fixture.Build<Statistic>().With(s => s.GameDate, date).Create();
+            var jsonString = JsonConvert.SerializeObject(addingStatistic);
+            var statisticsModelStub = new StatisticsModelStub(testingStatisticsList);
+            var homeController = new HomeController(statisticsModelStub);
+
+            // Act
+            homeController.SetStatistics(jsonString);
+
+            // Assert
+            Assert.AreEqual(addingStatistic.GameDate, testingStatisticsList.Last().GameDate);
         }
     }
 }

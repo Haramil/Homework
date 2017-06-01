@@ -25,16 +25,16 @@ namespace TicTacToe.Logic.Tests
         private static TicTacToeFormLogic CreateLogic()
         {
             var fixture = new Fixture();
-            var testCellButtonsSet = new HashSet<Button>();
+            var testCellButtonsDict = new Dictionary<byte, Button>();
             for (int i = 0; i < 9; i++)
-                testCellButtonsSet.Add(fixture.Build<Button>().With(b => b.TabIndex, i).OmitAutoProperties().Create());
+                testCellButtonsDict.Add((byte)i, fixture.Build<Button>().OmitAutoProperties().Create());
             var testLabel = fixture.Build<Label>().OmitAutoProperties().Create();
             var testTextBox = fixture.Build<TextBox>().OmitAutoProperties().Create();
             var testImage = new Bitmap(1, 1);
             var statisticsWrapperMock = new Mock<IStatisticsWrapper>();
             statisticsWrapperMock.Setup(w => w.SendGameResult(It.IsAny<string>(), It.IsAny<Statistic>()));
-            statisticsWrapperMock.Setup(w => w.GetStatistics(It.IsAny<string>())).Returns(new List<Statistic>());
-            return new TicTacToeFormLogic(testCellButtonsSet, testLabel, testLabel, testTextBox,
+            statisticsWrapperMock.Setup(w => w.GetStatistics(It.IsAny<string>())).Returns(new Fixture().Create<List<Statistic>>());
+            return new TicTacToeFormLogic(testCellButtonsDict, testLabel, testLabel, testTextBox,
                 testImage, testImage, testImage, statisticsWrapperMock.Object);
         }
 
@@ -90,37 +90,37 @@ namespace TicTacToe.Logic.Tests
             logic.StartGame(false, false);
 
             // X |   | 
-            //-----------
+            //---+---+---
             //   |   |
-            //-----------
+            //---+---+---
             //   |   |   
             logic.PlayerMove(0);
 
             // X |   | 
-            //-----------
+            //---+---+---
             // O |   |
-            //-----------
+            //---+---+---
             //   |   |   
             logic.PlayerMove(3);
 
             // X | X | 
-            //-----------
+            //---+---+---
             // O |   |
-            //-----------
+            //---+---+---
             //   |   |   
             logic.PlayerMove(1);
 
             // X | X | 
-            //-----------
+            //---+---+---
             // O |   |
-            //-----------
+            //---+---+---
             // O |   |   
             logic.PlayerMove(6);
 
             // X | X | X
-            //-----------
+            //---+---+---
             // O |   |
-            //-----------
+            //---+---+---
             // O |   |   
             logic.PlayerMove(2);
 
@@ -178,7 +178,7 @@ namespace TicTacToe.Logic.Tests
         {
             // Arrange
             var logic = CreateLogic();
-            var cellNum = new Random().Next(0, 9);
+            var cellNum = (byte)(new Random().Next(0, 9));
 
             // Act
             logic.StartGame(false, false);

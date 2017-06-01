@@ -22,10 +22,9 @@ namespace TicTacToe
             // Создаём экземпляр класса StatisticsWrapper
             wrapper = new StatisticsWrapper();
             // Создаем экземпляр класса TicTacToeFormLogic,
-            // передаем в него множество с кнопками, лейблы для вывода информации, изображения для ячеек и объект wrapper
-            logic = new TicTacToeFormLogic(new HashSet<Button>(gameFieldGroupBox.Controls.Cast<Button>()), 
-                currentSideLabel, resultLabel, uriTextBox, Properties.Resources.X, Properties.Resources.O, 
-                Properties.Resources.Empty, wrapper);
+            // передаем в него словарь с кнопками, лейблы для вывода информации, изображения для ячеек и объект wrapper
+            logic = new TicTacToeFormLogic(gameFieldGroupBox.Controls.Cast<Button>().ToDictionary(b => (byte)b.TabIndex, b => b), 
+                currentSideLabel, resultLabel, uriTextBox, Properties.Resources.X, Properties.Resources.O, Properties.Resources.Empty, wrapper);
         }
 
         private void singlePlayerRadioButton_CheckedChanged(object sender, EventArgs e)
@@ -46,7 +45,7 @@ namespace TicTacToe
             try
             {
                 // Ход игрока
-                logic.PlayerMove((sender as Button).TabIndex);
+                logic.PlayerMove((byte)(sender as Button).TabIndex);
                 ErrorClear();
             }
             catch (GameNotInProgressException ex) // Обрабатываем исключение GameNotInProgressException
