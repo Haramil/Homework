@@ -191,6 +191,26 @@ namespace TicTacToe.Logic.Tests
 
         /// <summary>
         /// Юнит-тест для метода PlayerMove.
+        /// Игра не начата, ход игрока.
+        /// При попытке сходить до начала игры должно быть вызвано исключение GameNotInProgressException
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(GameNotInProgressException))]
+        public void PlayerMove_PlayerVsPlayer_GameNotInProgress()
+        {
+            // Arrange
+            var logic = CreateLogic();
+            var cellNum = (byte)(new Random().Next(0, 9));
+
+            // Act
+            logic.PlayerMove(cellNum);
+
+            // Assert
+            // Ожидается GameNotInProgressException
+        }
+
+        /// <summary>
+        /// Юнит-тест для метода PlayerMove.
         /// Игра человека и человека, игрок делает ход.
         /// Ход игрока должен выполниться (ячейка, куда он сходил, должна стать занятой крестиком)
         /// </summary>
